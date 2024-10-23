@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<ClienteContext>(opts => opts.UseNpgsql(builder.Configuration.GetConnectionString("FilmeConnection")));
+builder.Services.AddDbContext<ClienteContext>(opts => opts.UseNpgsql(builder.Configuration.GetConnectionString("FSCConnection")));
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

@@ -1,6 +1,6 @@
 @FazendaSharpCity_API_HostAddress = http://localhost:5159
 
-GET {{FazendaSharpCity_API_HostAddress}}/weatherforecast/
+GET {{FazendaSharpCity_API_HostAddress}}/fazendasharpcity_api/
 Accept: application/json
 
 ###
