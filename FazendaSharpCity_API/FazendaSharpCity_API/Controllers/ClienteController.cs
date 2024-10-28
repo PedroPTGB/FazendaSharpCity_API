@@ -32,9 +32,9 @@ namespace FazendaSharpCity_API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<ReadClienteDto> lerCliente([FromQuery] int skip = 0, int take = 10)
+        public IEnumerable<ReadClienteDto> lerCliente([FromQuery] int pageNumber = 1, int pageQtd = 10)
         {
-            return _mapper.Map<IEnumerable<ReadClienteDto>>(_context.Clientes.Skip(skip).Take(take));
+            return _mapper.Map<IEnumerable<ReadClienteDto>>(_context.Clientes.Skip((pageNumber-1)*pageQtd).Take(pageQtd));
         }
 
         [HttpGet("{id}")]

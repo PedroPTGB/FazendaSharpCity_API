@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\FazendaSharpCity_API.props" />
+</Project>
