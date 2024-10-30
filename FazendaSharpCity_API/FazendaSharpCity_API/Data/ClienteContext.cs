@@ -1,4 +1,4 @@
-﻿using FilmesApi.Models;
+﻿using FazendaSharpCity_API.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace FazendaSharpCity_API.Data

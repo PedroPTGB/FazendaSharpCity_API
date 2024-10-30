@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using FazendaSharpCity_API.Data;
 using FazendaSharpCity_API.Data.DTOs;
-using FilmesApi.Models;
+using FazendaSharpCity_API.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 

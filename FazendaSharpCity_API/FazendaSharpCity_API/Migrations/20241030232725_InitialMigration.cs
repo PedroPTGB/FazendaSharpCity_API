@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FazendaSharpCity_API.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialFirstMigration : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -21,9 +21,9 @@ namespace FazendaSharpCity_API.Migrations
                     Nome = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Telefone = table.Column<string>(type: "text", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
-                    Cpf = table.Column<string>(type: "text", nullable: false),
-                    Cnpj = table.Column<string>(type: "text", nullable: false),
-                    Sexo = table.Column<short>(type: "smallint", nullable: false),
+                    Cpf = table.Column<long>(type: "bigint", nullable: false),
+                    Cnpj = table.Column<long>(type: "bigint", nullable: false),
+                    Sexo = table.Column<char>(type: "character(1)", nullable: false),
                     DtNasc = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     TipoPessoa = table.Column<bool>(type: "boolean", nullable: false)
                 },

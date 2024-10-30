@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FazendaSharpCity_API.Migrations
 {
     [DbContext(typeof(ClienteContext))]
-    [Migration("20241027184310_InitialFirstMigration")]
-    partial class InitialFirstMigration
+    [Migration("20241030232725_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,7 +25,7 @@ namespace FazendaSharpCity_API.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("FilmesApi.Models.Cliente", b =>
+            modelBuilder.Entity("FazendaSharpCity_API.Models.Cliente", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,13 +33,11 @@ namespace FazendaSharpCity_API.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Cnpj")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<long>("Cnpj")
+                        .HasColumnType("bigint");
 
-                    b.Property<string>("Cpf")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<long>("Cpf")
+                        .HasColumnType("bigint");
 
                     b.Property<DateTime>("DtNasc")
                         .HasColumnType("timestamp with time zone");
@@ -53,8 +51,8 @@ namespace FazendaSharpCity_API.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("character varying(100)");
 
-                    b.Property<short>("Sexo")
-                        .HasColumnType("smallint");
+                    b.Property<char>("Sexo")
+                        .HasColumnType("character(1)");
 
                     b.Property<string>("Telefone")
                         .IsRequired()

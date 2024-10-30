@@ -14,16 +14,16 @@ namespace FazendaSharpCity_API.Data.DTOs
         [Required(ErrorMessage = "O CPF é obrigatório")]
         //[MaxLength(11, ErrorMessage = "O CPF do cliente não pode exceder 11 caracteres")]
         //[MinLength(11, ErrorMessage = "O CPF do cliente não pode ser menor que 11 caracteres")]
-        [RegularExpression(@"/^[0-9]{11}/", ErrorMessage = "O CPF deve conter apenas números e possuir 11 caracteres")]
-        public string Cpf { get; set; }
+        [RegularExpression(@"\d{11}", ErrorMessage = "O CPF deve conter apenas números e possuir 11 caracteres")]
+        public long Cpf { get; set; }
 
         [Required(ErrorMessage = "O CNPJ é obrigatório")]
-        [RegularExpression(@"/^[0-9]{14}/", ErrorMessage = "O CNPJ deve conter apenas números e possuir 14 caracteres")]
-        public string Cnpj { get; set; }
+        [RegularExpression(@"\d{14}", ErrorMessage = "O CNPJ deve conter apenas números e possuir 14 caracteres")]
+        public long Cnpj { get; set; }
 
         [Required(ErrorMessage = "O Sexo é obrigatório")]
-        [RegularExpression(@"/^[1-3]/", ErrorMessage = "O Sexo deve ser escolhido entre Masculino, feminino ou não binário")]
-        public short Sexo { get; set; }
+        [RegularExpression(@"[M,F,I,m,f,i]", ErrorMessage = "O Sexo deve ser escolhido entre Masculino, feminino ou não binário")]
+        public char Sexo { get; set; }
 
         [Required(ErrorMessage = "A data de nascimento é obrigatória")]
         [DisplayFormat(DataFormatString = "dd/mm/yyyy")]
@@ -36,7 +36,7 @@ namespace FazendaSharpCity_API.Data.DTOs
         public UpdateClienteDto()
         {
             Endereco endereco = new Endereco();
-            if (Cpf != "")
+            if (Cpf != null)
                 TipoPessoa = true;
             else
                 TipoPessoa = false;
