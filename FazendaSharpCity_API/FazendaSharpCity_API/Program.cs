@@ -1,4 +1,4 @@
-using FazendaSharpCity_API.Data;
+using FazendaSharpCity_API.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using FazendaSharpCity_API.Data;
-using FazendaSharpCity_API.Data.DTOs;
+using FazendaSharpCity_API.Data.Contexts;
+using FazendaSharpCity_API.Data.DTOs.Cliente;
 using FazendaSharpCity_API.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
@@ -47,7 +47,7 @@ namespace FazendaSharpCity_API.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult atualizaFilme(int id, [FromBody] UpdateClienteDto clienteDto)
+        public IActionResult atualizaCliente(int id, [FromBody] UpdateClienteDto clienteDto)
         {
             var cliente = _context.Clientes.FirstOrDefault(cliente => cliente.Id == id);
             if (cliente == null) return NotFound();

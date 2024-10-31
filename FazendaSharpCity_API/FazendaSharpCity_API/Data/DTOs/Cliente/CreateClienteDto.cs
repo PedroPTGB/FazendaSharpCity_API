@@ -1,7 +1,7 @@
 ﻿using FazendaSharpCity_API.Models;
 using System.ComponentModel.DataAnnotations;
 
-namespace FazendaSharpCity_API.Data.DTOs
+namespace FazendaSharpCity_API.Data.DTOs.Cliente
 {
     public class CreateClienteDto
     {
