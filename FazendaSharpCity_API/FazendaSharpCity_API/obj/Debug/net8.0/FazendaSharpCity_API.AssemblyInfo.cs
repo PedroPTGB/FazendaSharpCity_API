@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FazendaSharpCity_API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6f4fb3edbba0c60ae25d89e024340b42f155f9f5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b8e73d5c90acfaa0d694b03e5f3420e7e90064ea")]
 [assembly: System.Reflection.AssemblyProductAttribute("FazendaSharpCity_API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FazendaSharpCity_API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
