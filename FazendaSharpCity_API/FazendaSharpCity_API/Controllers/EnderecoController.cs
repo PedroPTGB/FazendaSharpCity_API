@@ -10,3 +10,5 @@ namespace FazendaSharpCity_API.Controllers
         }
     }
 }
+
+//Por hora não temos previsão da real necessidade de um controler para endereco
