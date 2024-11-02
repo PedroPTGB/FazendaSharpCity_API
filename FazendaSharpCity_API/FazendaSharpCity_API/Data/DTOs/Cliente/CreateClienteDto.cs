@@ -32,11 +32,10 @@ namespace FazendaSharpCity_API.Data.DTOs.Cliente
         public bool TipoPessoa { get; set; }
 
         [Required]
-        Endereco endereco = new Endereco();
+        Endereco endereco { get; set; }
 
         public CreateClienteDto()
         {
-            Endereco endereco = new Endereco();
             if (Cpf != null)
                 TipoPessoa = true;
             else

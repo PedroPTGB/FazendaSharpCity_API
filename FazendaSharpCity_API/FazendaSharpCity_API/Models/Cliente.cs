@@ -1,8 +1,10 @@
 ﻿using FazendaSharpCity_API.Models;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FazendaSharpCity_API.Models
 {
+    [Table("Clientes")]
     public class Cliente
     {
         [Key]
@@ -36,11 +38,10 @@ namespace FazendaSharpCity_API.Models
 
         public bool TipoPessoa { get; set; }
         [Required]
-        Endereco endereco = new Endereco();
+        Endereco endereco { get; set; }
 
         public Cliente()
         {
-            Endereco endereco = new Endereco();
             if (Cpf != null)
                 TipoPessoa = true;
             else

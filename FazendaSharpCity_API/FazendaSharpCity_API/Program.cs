@@ -4,6 +4,11 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<ClienteContext>(opts => opts.UseNpgsql(builder.Configuration.GetConnectionString("FSCConnection")));
+builder.Services.AddDbContext<FornecedorContext>(opts => opts.UseNpgsql(builder.Configuration.GetConnectionString("FSCConnection")));
+builder.Services.AddDbContext<FuncionarioContext>(opts => opts.UseNpgsql(builder.Configuration.GetConnectionString("FSCConnection")));
+builder.Services.AddDbContext<ProdutoContext>(opts => opts.UseNpgsql(builder.Configuration.GetConnectionString("FSCConnection")));
+builder.Services.AddDbContext<VendaContext>(opts => opts.UseNpgsql(builder.Configuration.GetConnectionString("FSCConnection")));
+
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

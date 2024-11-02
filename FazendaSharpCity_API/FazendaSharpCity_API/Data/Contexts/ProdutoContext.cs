@@ -1,7 +1,7 @@
 ﻿using FazendaSharpCity_API.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace FazendaSharpCity_API.Data
+namespace FazendaSharpCity_API.Data.Contexts
 {
     public class ProdutoContext : DbContext
     {

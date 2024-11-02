@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace FazendaSharpCity_API.Migrations
 {
     [DbContext(typeof(ClienteContext))]
-    [Migration("20241030232725_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20241102232926_InitialMigrationCliente")]
+    partial class InitialMigrationCliente
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

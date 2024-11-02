@@ -1,7 +1,13 @@
-﻿namespace FazendaSharpCity_API.Models
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace FazendaSharpCity_API.Models
 {
+    [Table("Fornecedores")]
     public class Fornecedor
     {
+        [Key]
+        [Required]
         public int Id { get; set; }
         public string RazaoSocial { get; set; }
         public string NomeFantasia { get; set; }

@@ -1,9 +1,11 @@
-﻿using FazendaSharpCity_API.Data;
+﻿using FazendaSharpCity_API.Data.Contexts;
 using FazendaSharpCity_API.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FazendaSharpCity_API.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class FornecedorController : Controller
     {
         private FornecedorContext _context;

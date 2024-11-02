@@ -13,10 +13,9 @@ namespace FazendaSharpCity_API.Data.DTOs.Cliente
         public char Sexo { get; set; }
         public DateTime DtNasc { get; set; }
         public bool TipoPessoa { get; set; }
-        Endereco endereco = new Endereco();
+        Endereco endereco {  get; set; }
         public ReadClienteDto()
         {
-            Endereco endereco = new Endereco();
             if (Cpf != null)
                 TipoPessoa = true;
             else
