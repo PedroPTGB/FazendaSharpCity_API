@@ -1,4 +1,7 @@
-﻿using FazendaSharpCity_API.Data.Contexts;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using FazendaSharpCity_API.Data.Contexts;
+using FazendaSharpCity_API.Data.DTOs.Fornecedor;
 using FazendaSharpCity_API.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,15 +12,19 @@ namespace FazendaSharpCity_API.Controllers
     public class FornecedorController : Controller
     {
         private FornecedorContext _context;
+        private IMapper _mapper;
 
-        public FornecedorController(FornecedorContext context)
+        public FornecedorController(FornecedorContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpPost]
-        public async Task<IActionResult> AdicionarFornecedor([FromBody] Fornecedor fornecedor)
+        public async Task<IActionResult>CreateFornecedor([FromBody] CreateFornecedorDto fornecedorDto)
         {
+            Fornecedor fornecedor = _mapper.Map<Fornecedor>(fornecedorDto);
+
             if(fornecedor == null)
             {
                 return BadRequest("Fornecedor não pode ser nulo.");
@@ -26,11 +33,11 @@ namespace FazendaSharpCity_API.Controllers
             await _context.Fornecedores.AddAsync(fornecedor);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(ConsultaFornecedor), new { id = fornecedor.Id }, fornecedor.Id);
+            return CreatedAtAction(nameof(GetFornecedor), new { id = fornecedor.Id }, fornecedor.Id);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> ConsultaFornecedor(int id)
+        [HttpGet("{id}")]
+        public async Task<IActionResult>GetFornecedor(int id)
         {
             var fornecedor = await _context.Fornecedores.FindAsync(id);
 
@@ -42,6 +49,22 @@ namespace FazendaSharpCity_API.Controllers
             {
                 return Ok(fornecedor);
             }
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult>UpdateFornecedor(int id, [FromBody] UpdateFornecedorDto fornecedorDto)
+        {
+            var fornecedor = _context.Fornecedores.FirstOrDefault(fornecedor => fornecedor.Id == id);
+
+            if(fornecedor == null)
+            {
+                return NotFound();
+            }
+
+            _mapper.Map(fornecedorDto, fornecedor);
+            _context.SaveChanges();
+
+            return NoContent();
         }
     }       
 }
