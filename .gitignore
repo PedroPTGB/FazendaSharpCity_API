@@ -398,3 +398,24 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/FazendaSharpCity_API/FazendaSharpCity_API/bin/Debug/net8.0/FazendaSharpCity_API.dll
+/FazendaSharpCity_API/FazendaSharpCity_API/bin/Debug/net8.0/FazendaSharpCity_API.exe
+/FazendaSharpCity_API/FazendaSharpCity_API/obj/Debug/net8.0/ref/FazendaSharpCity_API.dll
+/FazendaSharpCity_API/FazendaSharpCity_API/bin/Debug/net8.0/FazendaSharpCity_API.pdb
+/FazendaSharpCity_API/FazendaSharpCity_API/obj/Debug/net8.0/refint/FazendaSharpCity_API.dll
+/FazendaSharpCity_API/FazendaSharpCity_API/obj/Debug/net8.0/apphost.exe
+/FazendaSharpCity_API/FazendaSharpCity_API/obj/Debug/net8.0/FazendaSharpCity_API.AssemblyInfo.cs
+/FazendaSharpCity_API/FazendaSharpCity_API/obj/Debug/net8.0/FazendaSharpCity_API.AssemblyInfoInputs.cache
+/FazendaSharpCity_API/FazendaSharpCity_API/obj/Debug/net8.0/FazendaSharpCity_API.assets.cache
+/FazendaSharpCity_API/FazendaSharpCity_API/obj/Debug/net8.0/FazendaSharpCity_API.csproj.AssemblyReference.cache
+/FazendaSharpCity_API/FazendaSharpCity_API/obj/Debug/net8.0/FazendaSharpCity_API.csproj.CoreCompileInputs.cache
+/FazendaSharpCity_API/FazendaSharpCity_API/obj/Debug/net8.0/FazendaSharpCity_API.csproj.FileListAbsolute.txt
+/FazendaSharpCity_API/FazendaSharpCity_API/obj/Debug/net8.0/FazendaSharpCity_API.dll
+/FazendaSharpCity_API/FazendaSharpCity_API/obj/Debug/net8.0/FazendaSharpCity_API.GeneratedMSBuildEditorConfig.editorconfig
+/FazendaSharpCity_API/FazendaSharpCity_API/obj/Debug/net8.0/FazendaSharpCity_API.genruntimeconfig.cache
+/FazendaSharpCity_API/FazendaSharpCity_API/obj/Debug/net8.0/FazendaSharpCity_API.pdb
+/FazendaSharpCity_API/FazendaSharpCity_API/obj/Debug/net8.0/FazendaSharpCity_API.sourcelink.json
+/FazendaSharpCity_API/FazendaSharpCity_API/obj/FazendaSharpCity_API.csproj.nuget.dgspec.json
+/FazendaSharpCity_API/FazendaSharpCity_API/obj/FazendaSharpCity_API.csproj.nuget.g.props
+/FazendaSharpCity_API/FazendaSharpCity_API/obj/project.assets.json
+/FazendaSharpCity_API/FazendaSharpCity_API/obj/project.nuget.cache
