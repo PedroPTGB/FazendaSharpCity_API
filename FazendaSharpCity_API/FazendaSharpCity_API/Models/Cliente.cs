@@ -14,7 +14,13 @@ namespace FazendaSharpCity_API.Models
         [Required(ErrorMessage = "O Nome do cliente é obrigatório")]
         [MaxLength(100, ErrorMessage = "O Nome do cliente não pode exceder 100 caracteres")]
         public string Nome { get; set; }
+
+        [RegularExpression(@"^\(?\d{2}\)?[\s-]?[\d]{4,5}-?[\d]{4}$", ErrorMessage = "O telefone deve estar em um formato válido (ex: (99) 99999-9999).")]
         public string Telefone { get; set; }
+
+
+        [Required(ErrorMessage = "O e-mail é obrigatório.")]
+        [EmailAddress(ErrorMessage = "O e-mail deve ser válido.")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "O CPF é obrigatório")]
