@@ -66,5 +66,21 @@ namespace FazendaSharpCity_API.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult>DeleteFornecedor(int id)
+        {
+            var fornecedor = _context.Fornecedores.FirstOrDefault(fornecedor => fornecedor.Id == id);
+
+            if(fornecedor == null)
+            {
+                return NotFound();
+            }
+
+            _context.Fornecedores.Remove(fornecedor);
+            _context.SaveChanges();
+
+            return Ok();
+        }
     }       
 }

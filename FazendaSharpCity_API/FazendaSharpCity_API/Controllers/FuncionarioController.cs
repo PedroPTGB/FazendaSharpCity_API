@@ -69,5 +69,21 @@ namespace FazendaSharpCity_API.Controllers
             return NoContent();
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult>DeleteFuncionario(int id)
+        {
+            var funcionario = _context.Funcionarios.FirstOrDefault(funcionario => funcionario.Id == id);
+
+            if(funcionario == null)
+            {
+                return NotFound();
+            }
+
+            _context.Funcionarios.Remove(funcionario);
+            _context.SaveChanges();
+
+            return Ok();
+        }
+
     }
 }
