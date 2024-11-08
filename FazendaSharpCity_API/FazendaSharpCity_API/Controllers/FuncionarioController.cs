@@ -22,7 +22,7 @@ namespace FazendaSharpCity_API.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> CreateFuncionario([FromBody] CreateFuncionarioDto funcionarioDto)
+        public async Task<IActionResult>CreateFuncionario([FromBody] CreateFuncionarioDto funcionarioDto)
         {
             Funcionario funcionario = _mapper.Map<Funcionario>(funcionarioDto);
 
@@ -66,7 +66,7 @@ namespace FazendaSharpCity_API.Controllers
             _mapper.Map(funcionarioDto, funcionario);
             _context.SaveChanges();
 
-            return NoContent();
+            return Ok(funcionario);
         }
 
         [HttpDelete("{id}")]
