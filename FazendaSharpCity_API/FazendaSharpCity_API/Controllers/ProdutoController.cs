@@ -13,7 +13,7 @@ namespace FazendaSharpCity_API.Controllers
         private ProdutoContext _context;
         private IMapper _mapper;
 
-        public ProdutoController(Produto context, IMapper mapper)
+        public ProdutoController(ProdutoContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
