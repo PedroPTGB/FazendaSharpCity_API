@@ -25,10 +25,10 @@ namespace FazendaSharpCity_API.Controllers
         {
             Fornecedor fornecedor = _mapper.Map<Fornecedor>(fornecedorDto);
 
-            if(fornecedor == null)
-            {
-                return BadRequest("Fornecedor não pode ser nulo.");
-            }
+            //if(fornecedor == null)
+            //{
+            //    return BadRequest("Fornecedor não pode ser nulo.");
+            //}
 
             await _context.Fornecedores.AddAsync(fornecedor);
             await _context.SaveChangesAsync();
