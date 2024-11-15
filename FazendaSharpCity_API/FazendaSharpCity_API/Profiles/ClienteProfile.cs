@@ -11,6 +11,6 @@ public class ClienteProfile : Profile
         CreateMap<CreateClienteDto, Cliente>();
         CreateMap<UpdateClienteDto, Cliente>();
         CreateMap<Cliente, UpdateClienteDto>();
-        CreateMap<Cliente, ReadClienteDto>();
+        CreateMap<Cliente, ReadClienteDto>().ForMember(clienteDto => clienteDto.Endereco,opt => opt.MapFrom(cliente => cliente.Endereco));
     }
 }

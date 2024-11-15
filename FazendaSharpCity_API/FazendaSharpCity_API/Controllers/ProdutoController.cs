@@ -10,10 +10,10 @@ namespace FazendaSharpCity_API.Controllers
     [Route("[controller]")]
     public class ProdutoController : Controller
     {
-        private ProdutoContext _context;
+        private ApiContext _context;
         private IMapper _mapper;
 
-        public ProdutoController(ProdutoContext context, IMapper mapper)
+        public ProdutoController(ApiContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

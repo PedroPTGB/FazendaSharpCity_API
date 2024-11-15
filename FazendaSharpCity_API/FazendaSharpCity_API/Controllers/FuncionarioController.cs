@@ -11,10 +11,10 @@ namespace FazendaSharpCity_API.Controllers
     [Route("[controller]")]
     public class FuncionarioController : Controller
     {
-        private FuncionarioContext _context;
+        private ApiContext _context;
         private IMapper _mapper;
 
-        public FuncionarioController(FuncionarioContext context, IMapper mapper)
+        public FuncionarioController(ApiContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;

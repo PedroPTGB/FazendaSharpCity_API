@@ -4,6 +4,7 @@ using FazendaSharpCity_API.Data.DTOs.Cliente;
 using FazendaSharpCity_API.Models;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.Eventing.Reader;
 
 namespace FazendaSharpCity_API.Controllers
 {
@@ -13,10 +14,10 @@ namespace FazendaSharpCity_API.Controllers
     public class ClienteController : ControllerBase
     {
 
-        private ClienteContext _context;
+        private ApiContext _context;
         private IMapper _mapper;
 
-        public ClienteController(ClienteContext context, IMapper mapper)
+        public ClienteController(ApiContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
@@ -34,7 +35,19 @@ namespace FazendaSharpCity_API.Controllers
         [HttpGet]
         public IEnumerable<ReadClienteDto> lerCliente([FromQuery] int pageNumber = 1, int pageQtd = 10)
         {
-            return _mapper.Map<IEnumerable<ReadClienteDto>>(_context.Clientes.Skip((pageNumber-1)*pageQtd).Take(pageQtd));
+            //var listaClientes = _mapper.Map<IEnumerable<ReadClienteDto>>(_context.Clientes.Skip((pageNumber - 1) * pageQtd).Take(pageQtd));
+            List<ReadClienteDto> clientes = new List<ReadClienteDto>();
+            for (int i = pageNumber-1; i < pageQtd; i++)
+            {
+                var cliente = _context.Clientes.FirstOrDefault(cliente => cliente.Id == i);
+                if (cliente != null) 
+                {
+                    var clienteDto = _mapper.Map<ReadClienteDto>(cliente);
+                    clientes.Add(clienteDto);
+                }
+            }
+
+            return clientes;
         }
 
         [HttpGet("{id}")]
@@ -52,25 +65,6 @@ namespace FazendaSharpCity_API.Controllers
             var cliente = _context.Clientes.FirstOrDefault(cliente => cliente.Id == id);
             if (cliente == null) return NotFound();
             _mapper.Map(clienteDto, cliente);
-            _context.SaveChanges();
-            return NoContent();
-        }
-
-        [HttpPatch("{id}")]
-        public IActionResult atualizaClienteParcial(int id, JsonPatchDocument<UpdateClienteDto> patch)
-        {
-            var cliente = _context.Clientes.FirstOrDefault(cliente => cliente.Id == id);
-            if (cliente == null) return NotFound();
-
-            var clienteParcial = _mapper.Map<UpdateClienteDto>(cliente);
-            patch.ApplyTo(clienteParcial, ModelState);
-
-            if (!TryValidateModel(clienteParcial))
-            {
-                return ValidationProblem(ModelState);
-            }
-
-            _mapper.Map(clienteParcial, cliente);
             _context.SaveChanges();
             return NoContent();
         }

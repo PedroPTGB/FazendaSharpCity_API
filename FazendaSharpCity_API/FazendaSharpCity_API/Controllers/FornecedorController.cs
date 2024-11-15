@@ -11,10 +11,10 @@ namespace FazendaSharpCity_API.Controllers
     [Route("[controller]")]
     public class FornecedorController : Controller
     {
-        private FornecedorContext _context;
+        private ApiContext _context;
         private IMapper _mapper;
 
-        public FornecedorController(FornecedorContext context, IMapper mapper)
+        public FornecedorController(ApiContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
