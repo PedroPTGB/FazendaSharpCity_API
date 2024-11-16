@@ -10,6 +10,22 @@ namespace FazendaSharpCity_API.Data.Contexts
 
         }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Endereco>()
+                .HasOne(endereco => endereco.Cliente)
+                .WithOne(cliente => cliente.Endereco)
+                .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Endereco>()
+                .HasOne(endereco => endereco.Fornecedor)
+                .WithOne(fornecedor => fornecedor.Endereco)
+                .OnDelete(DeleteBehavior.Restrict);
+            builder.Entity<Endereco>()
+                .HasOne(endereco => endereco.Funcionario)
+                .WithOne(funcionario => funcionario.Endereco)
+                .OnDelete(DeleteBehavior.Restrict);
+        }
+
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Fornecedor> Fornecedores { get; set; }
         public DbSet<Funcionario> Funcionarios { get; set; }

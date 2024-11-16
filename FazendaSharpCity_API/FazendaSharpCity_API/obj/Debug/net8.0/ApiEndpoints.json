@@ -32,6 +32,11 @@
         "Name": "pageQtd",
         "Type": "System.Int32",
         "IsRequired": false
+      },
+      {
+        "Name": "nome",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -390,6 +395,22 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FazendaSharpCity_API.Controllers.UsuarioController",
+    "Method": "CadatraUsuario",
+    "RelativePath": "Usuario",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usuarioDto",
+        "Type": "FazendaSharpCity_API.Data.DTOs.Usuario.CreateUsuarioDto",
         "IsRequired": true
       }
     ],

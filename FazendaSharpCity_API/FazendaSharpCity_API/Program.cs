@@ -1,12 +1,32 @@
 using FazendaSharpCity_API.Data.Contexts;
+using FazendaSharpCity_API.Models;
+using FazendaSharpCity_API.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<ApiContext>(opts => opts.UseLazyLoadingProxies().UseNpgsql(builder.Configuration.GetConnectionString("FSCConnection")));
+var configuration = builder.Configuration;
+var connectionString = builder.Configuration.GetConnectionString("FSCConnection");
+builder.Services.AddDbContext<ApiContext>(opts => opts.UseLazyLoadingProxies().UseNpgsql(connectionString));
+builder.Services.AddDbContext<UsuarioContext>(opts => opts.UseNpgsql(connectionString));
 
+builder.Services.AddIdentity<Usuario, IdentityRole>().AddEntityFrameworkStores<UsuarioContext>().AddDefaultTokenProviders();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
+builder.Services.AddScoped<UsuarioService>();
+
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    // Default Password settings.
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequiredLength = 6;
+    options.Password.RequiredUniqueChars = 1;
+});
 
 // Add services to the container.
 

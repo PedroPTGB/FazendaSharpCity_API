@@ -33,17 +33,30 @@ namespace FazendaSharpCity_API.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<ReadClienteDto> lerCliente([FromQuery] int pageNumber = 1, int pageQtd = 10)
+        public IEnumerable<ReadClienteDto> lerCliente([FromQuery] int pageNumber = 1, int pageQtd = 10, string? nome = null)
         {
             //var listaClientes = _mapper.Map<IEnumerable<ReadClienteDto>>(_context.Clientes.Skip((pageNumber - 1) * pageQtd).Take(pageQtd));
             List<ReadClienteDto> clientes = new List<ReadClienteDto>();
-            for (int i = pageNumber-1; i < pageQtd; i++)
+            for (int i = pageNumber - 1; i < pageQtd; i++)
             {
-                var cliente = _context.Clientes.FirstOrDefault(cliente => cliente.Id == i);
-                if (cliente != null) 
+
+                if (nome == null)
                 {
-                    var clienteDto = _mapper.Map<ReadClienteDto>(cliente);
-                    clientes.Add(clienteDto);
+                    var cliente = _context.Clientes.FirstOrDefault(cliente => cliente.Id == i);
+                    if (cliente != null)
+                    {
+                        var clienteDto = _mapper.Map<ReadClienteDto>(cliente);
+                        clientes.Add(clienteDto);
+                    }
+                }
+                else
+                {
+                    var cliente = _context.Clientes.Where(cliente => cliente.Nome.Contains(nome));
+                    if (cliente != null)
+                    {
+                        var clienteDto = _mapper.Map<ReadClienteDto>(cliente);
+                        clientes.Add(clienteDto);
+                    }
                 }
             }
 
