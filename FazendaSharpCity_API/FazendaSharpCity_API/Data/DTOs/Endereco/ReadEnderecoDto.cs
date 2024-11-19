@@ -11,6 +11,6 @@ namespace FazendaSharpCity_API.Data.DTOs.Endereco
         public string Estado { get; set; }
         public string Cidade { get; set; }
         public string Cep { get; set; }
-        public int Num { get; set; }
+        public int Numero { get; set; }
     }
 }

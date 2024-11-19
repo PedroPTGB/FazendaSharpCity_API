@@ -29,11 +29,11 @@ namespace FazendaSharpCity_API.Models
 
         [Required(ErrorMessage = "O CEP é obrigatório.")]
         [RegularExpression(@"^\d{8}$", ErrorMessage = "O CEP deve conter exatamente 8 dígitos numéricos.")]
-        public string Cep { get; set; }
+        public string CEP { get; set; }
 
         [Required(ErrorMessage = "O número é obrigatório.")]
         [Range(1, int.MaxValue, ErrorMessage = "O número deve ser maior que zero.")]
-        public int Num { get; set; }
+        public int Numero { get; set; }
 
         public virtual Cliente? Cliente { get; set; }
         public virtual Fornecedor? Fornecedor { get; set; }
