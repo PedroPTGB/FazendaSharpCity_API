@@ -403,7 +403,7 @@
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.UsuarioController",
     "Method": "CadatraUsuario",
-    "RelativePath": "Usuario",
+    "RelativePath": "Usuario/cadastro",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -411,6 +411,22 @@
       {
         "Name": "usuarioDto",
         "Type": "FazendaSharpCity_API.Data.DTOs.Usuario.CreateUsuarioDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FazendaSharpCity_API.Controllers.UsuarioController",
+    "Method": "LoginAsync",
+    "RelativePath": "Usuario/login",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "loginDto",
+        "Type": "FazendaSharpCity_API.Data.DTOs.Usuario.LoginUsuarioDto",
         "IsRequired": true
       }
     ],

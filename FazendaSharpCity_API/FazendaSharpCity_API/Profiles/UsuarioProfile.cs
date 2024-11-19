@@ -12,7 +12,7 @@ namespace FazendaSharpCity_API.Profiles
             CreateMap<CreateUsuarioDto, Usuario>();
             CreateMap<UpdateUsuarioDto, Usuario>();
             CreateMap<Usuario, UpdateUsuarioDto>();
-            CreateMap<Usuario, ReadUsuarioDto>();
+            CreateMap<Usuario, LoginUsuarioDto>();
         }
     }
 }

@@ -16,6 +16,7 @@ builder.Services.AddIdentity<Usuario, IdentityRole>().AddEntityFrameworkStores<U
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<UsuarioService>();
+builder.Services.AddScoped<TokenService>();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {

@@ -2,10 +2,11 @@
 
 namespace FazendaSharpCity_API.Data.DTOs.Usuario
 {
-    public class ReadUsuarioDto
+    public class LoginUsuarioDto
     {
+        [Required]
         public string Login { get; set; }
+        [Required]
         public string Password { get; set; }
-        public string ConfirmPassword { get; set; }
     }
 }
