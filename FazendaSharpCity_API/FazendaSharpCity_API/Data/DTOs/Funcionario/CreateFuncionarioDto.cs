@@ -40,8 +40,7 @@ namespace FazendaSharpCity_API.Data.DTOs.Funcionario
 
         //[RegularExpression(@"^\d{8}$", ErrorMessage = "O CEP deve conter exatamente 8 dígitos numéricos.")]
         //public string Cep { get; set; }
-
-        public int Endereco { get; set; }
+        public string Endereco { get; set; }
 
         [Required(ErrorMessage = "O salário é obrigatório.")]
         [Range(0.01, double.MaxValue, ErrorMessage = "O salário deve ser maior que zero.")]

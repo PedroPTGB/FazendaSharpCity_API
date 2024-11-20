@@ -14,7 +14,7 @@ namespace FazendaSharpCity_API.Data.DTOs.Fornecedor
 
         [Required(ErrorMessage = "O CNPJ é obrigatório.")]
         [RegularExpression(@"^\d{14}$", ErrorMessage = "O CNPJ deve conter exatamente 14 dígitos numéricos.")]
-        public string Cnpj { get; set; }
+        public string CNPJ { get; set; }
 
         [Required(ErrorMessage = "O e-mail é obrigatório.")]
         [EmailAddress(ErrorMessage = "O e-mail deve estar em um formato válido.")]
@@ -37,8 +37,6 @@ namespace FazendaSharpCity_API.Data.DTOs.Fornecedor
 
         //[RegularExpression(@"^\d{8}$", ErrorMessage = "O CEP deve conter exatamente 8 dígitos numéricos.")]
         //public string Cep { get; set; }
-
-
 
         [RegularExpression(@"^\(?\d{2}\)?[\s-]?[\d]{4,5}-?[\d]{4}$", ErrorMessage = "O telefone deve estar em um formato válido (ex: (99) 99999-9999).")]
         public string TelefoneFornecedor { get; set; }

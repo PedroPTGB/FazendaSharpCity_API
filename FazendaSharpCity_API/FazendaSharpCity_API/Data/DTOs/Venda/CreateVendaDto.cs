@@ -8,7 +8,7 @@ namespace FazendaSharpCity_API.Data.DTOs.Venda
 
         [Required(ErrorMessage = "O preço unitário é obrigatório.")]
         [Range(0.01, double.MaxValue, ErrorMessage = "O preço deve ser maior que zero.")]
-        public float PrecoUnitario { get; set; }
+        public decimal PrecoUnitario { get; set; }
 
         [Required(ErrorMessage = "A data da venda é obrigatória.")]
         [DataType(DataType.Date)]

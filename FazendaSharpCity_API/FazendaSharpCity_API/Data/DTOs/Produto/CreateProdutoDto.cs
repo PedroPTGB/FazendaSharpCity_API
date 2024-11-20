@@ -21,7 +21,7 @@ namespace FazendaSharpCity_API.Data.DTOs.Produto
 
         [Required(ErrorMessage = "O preço do produto é obrigatório.")]
         [Range(0.01, double.MaxValue, ErrorMessage = "O preço deve ser maior que zero.")]
-        public decimal? Preco { get; set; }
+        public decimal Preco { get; set; }
 
         [MaxLength(500, ErrorMessage = "A descrição não pode exceder 500 caracteres.")]
         public string Descricao { get; set; }

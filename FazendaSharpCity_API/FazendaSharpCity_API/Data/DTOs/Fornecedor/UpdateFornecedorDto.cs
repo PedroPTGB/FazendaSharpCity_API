@@ -14,7 +14,7 @@ namespace FazendaSharpCity_API.Models
 
         [Required(ErrorMessage = "O CNPJ é obrigatório.")]
         [RegularExpression(@"^\d{14}$", ErrorMessage = "O CNPJ deve conter exatamente 14 dígitos numéricos.")]
-        public string Cnpj { get; set; }
+        public string CNPJ { get; set; }
 
         [Required(ErrorMessage = "O e-mail é obrigatório.")]
         [EmailAddress(ErrorMessage = "O e-mail deve estar em um formato válido.")]
