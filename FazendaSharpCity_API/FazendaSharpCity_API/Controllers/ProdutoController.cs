@@ -20,66 +20,98 @@ namespace FazendaSharpCity_API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult>CreateProduto([FromBody] CreateProdutoDto createProdutoDto)
+        public async Task<IActionResult> CreateProduto([FromBody] CreateProdutoDto createProdutoDto)
         {
-            Produto produto = _mapper.Map<Produto>(createProdutoDto);
-
-            if (produto == null) 
+            try
             {
-                return BadRequest("O produto não pode ser nulo");
+                Produto produto = _mapper.Map<Produto>(createProdutoDto);
+
+                if (produto == null)
+                {
+                    return BadRequest("O produto não pode ser nulo");
+                }
+
+                await _context.Produtos.AddAsync(produto);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction(nameof(GetProduto), new { id = produto.IdProduto }, produto.IdProduto);
+
             }
-
-            await _context.Produtos.AddAsync(produto);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetProduto), new { id = produto.IdProduto }, produto.IdProduto);
+            catch (Exception e)
+            {
+                throw;
+            }
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult>GetProduto(int id)
+        public async Task<IActionResult> GetProduto(int id)
         {
-            var produto = await _context.Produtos.FindAsync(id);
+            try
+            {
+                var produto = await _context.Produtos.FindAsync(id);
 
-            if(produto == null)
-            {
-                return NotFound();
+                if (produto == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(produto);
+                }
             }
-            else
+            catch (Exception)
             {
-                return Ok(produto);
+
+                throw;
             }
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult>UpdateProduto(int id, [FromBody] UpdateProdutoDto produtoDto)
+        public async Task<IActionResult> UpdateProduto(int id, [FromBody] UpdateProdutoDto produtoDto)
         {
-            var produto = _context.Produtos.FirstOrDefault(produto => produto.IdProduto == id);
-
-            if(produto == null)
+            try
             {
-                return NotFound();
+                var produto = _context.Produtos.FirstOrDefault(produto => produto.IdProduto == id);
+
+                if (produto == null)
+                {
+                    return NotFound();
+                }
+
+                _mapper.Map(produtoDto, produto);
+                _context.SaveChanges();
+
+                return Ok();
             }
+            catch (Exception)
+            {
 
-            _mapper.Map(produtoDto, produto);
-            _context.SaveChanges();
-
-            return Ok();
+                throw;
+            }
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult>DeleteProduto(int id)
+        public async Task<IActionResult> DeleteProduto(int id)
         {
-            var produto = _context.Produtos.FirstOrDefault(produto => produto.IdProduto == id);
-
-            if (produto == null)
+            try
             {
-                return NotFound();
+                var produto = _context.Produtos.FirstOrDefault(produto => produto.IdProduto == id);
+
+                if (produto == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Produtos.Remove(produto);
+                _context.SaveChanges();
+
+                return Ok();
             }
+            catch (Exception)
+            {
 
-            _context.Produtos.Remove(produto);
-            _context.SaveChanges();
-
-            return Ok();
+                throw;
+            }
         }
     }
 }
