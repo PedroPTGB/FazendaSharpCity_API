@@ -88,7 +88,7 @@ namespace FazendaSharpCity_API.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Nome = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Qtd = table.Column<int>(type: "integer", nullable: false),
-                    Validade = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Validade = table.Column<DateTime>(type: "timestamp", nullable: false),
                     Preco = table.Column<decimal>(type: "numeric", nullable: false),
                     Descricao = table.Column<string>(type: "character varying(500)", maxLength: 500, nullable: false)
                 },

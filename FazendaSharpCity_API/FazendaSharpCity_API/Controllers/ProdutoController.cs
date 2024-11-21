@@ -25,12 +25,6 @@ namespace FazendaSharpCity_API.Controllers
             try
             {
                 Produto produto = _mapper.Map<Produto>(createProdutoDto);
-
-                if (produto == null)
-                {
-                    return BadRequest("O produto não pode ser nulo");
-                }
-
                 await _context.Produtos.AddAsync(produto);
                 await _context.SaveChangesAsync();
 

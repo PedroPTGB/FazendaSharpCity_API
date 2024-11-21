@@ -13,8 +13,9 @@ namespace FazendaSharpCity_API.Data.DTOs.Produto
         public int Quantidade { get; set; }
 
         [Required(ErrorMessage = "A data de validade é obrigatória.")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DataType(DataType.DateTime)]
+        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        //[DisplayFormat(DataFormatString = "dd/mm/yyyy")]
         public DateTime Validade { get; set; }
 
         [Required(ErrorMessage = "O preço do produto é obrigatório.")]
