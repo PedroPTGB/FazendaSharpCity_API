@@ -21,66 +21,94 @@ namespace FazendaSharpCity_API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult>CreateFornecedor([FromBody] CreateFornecedorDto fornecedorDto)
+        public async Task<IActionResult> CreateFornecedor([FromBody] CreateFornecedorDto fornecedorDto)
         {
-            Fornecedor fornecedor = _mapper.Map<Fornecedor>(fornecedorDto);
+            try
+            {
+                Fornecedor fornecedor = _mapper.Map<Fornecedor>(fornecedorDto);
 
-            //if(fornecedor == null)
-            //{
-            //    return BadRequest("Fornecedor não pode ser nulo.");
-            //}
+                if (fornecedor == null)
+                {
+                    return BadRequest("Fornecedor não pode ser nulo.");
+                }
 
-            await _context.Fornecedores.AddAsync(fornecedor);
-            await _context.SaveChangesAsync();
+                await _context.Fornecedores.AddAsync(fornecedor);
+                await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetFornecedor), new { id = fornecedor.Id }, fornecedor.Id);
+                return CreatedAtAction(nameof(GetFornecedor), new { id = fornecedor.Id }, fornecedor.Id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult>GetFornecedor(int id)
+        public async Task<IActionResult> GetFornecedor(int id)
         {
-            var fornecedor = await _context.Fornecedores.FirstOrDefaultAsync(fornecedor => fornecedor.Id == id);
+            try
+            {
+                var fornecedor = await _context.Fornecedores.FirstOrDefaultAsync(fornecedor => fornecedor.Id == id);
 
-            if (fornecedor == null)
-            {
-                return NotFound();
+                if (fornecedor == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(fornecedor);
+                }
             }
-            else
+            catch (Exception)
             {
-                return Ok(fornecedor);
+                throw;
             }
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult>UpdateFornecedor(int id, [FromBody] UpdateFornecedorDto fornecedorDto)
+        public async Task<IActionResult> UpdateFornecedor(int id, [FromBody] UpdateFornecedorDto fornecedorDto)
         {
-            var fornecedor = _context.Fornecedores.FirstOrDefault(fornecedor => fornecedor.Id == id);
-
-            if(fornecedor == null)
+            try
             {
-                return NotFound();
+                var fornecedor = await _context.Fornecedores.FirstOrDefaultAsync(fornecedor => fornecedor.Id == id);
+
+                if (fornecedor == null)
+                {
+                    return NotFound();
+                }
+
+                _mapper.Map(fornecedorDto, fornecedor);
+               await _context.SaveChangesAsync();
+
+                return NoContent();
             }
-
-            _mapper.Map(fornecedorDto, fornecedor);
-            _context.SaveChanges();
-
-            return NoContent();
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult>DeleteFornecedor(int id)
+        public async Task<IActionResult> DeleteFornecedor(int id)
         {
-            var fornecedor = _context.Fornecedores.FirstOrDefault(fornecedor => fornecedor.Id == id);
-
-            if(fornecedor == null)
+            try
             {
-                return NotFound();
+                var fornecedor = await _context.Fornecedores.FirstOrDefaultAsync(fornecedor => fornecedor.Id == id);
+
+                if (fornecedor == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Fornecedores.Remove(fornecedor);
+               await _context.SaveChangesAsync();
+
+                return Ok();
             }
-
-            _context.Fornecedores.Remove(fornecedor);
-            _context.SaveChanges();
-
-            return Ok();
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }       
 }

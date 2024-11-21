@@ -3,6 +3,7 @@ using FazendaSharpCity_API.Data.Contexts;
 using FazendaSharpCity_API.Data.DTOs.Produto;
 using FazendaSharpCity_API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FazendaSharpCity_API.Controllers
 {
@@ -61,7 +62,6 @@ namespace FazendaSharpCity_API.Controllers
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -71,7 +71,7 @@ namespace FazendaSharpCity_API.Controllers
         {
             try
             {
-                var produto = _context.Produtos.FirstOrDefault(produto => produto.IdProduto == id);
+                var produto = await _context.Produtos.FirstOrDefaultAsync(produto => produto.IdProduto == id);
 
                 if (produto == null)
                 {
@@ -79,13 +79,12 @@ namespace FazendaSharpCity_API.Controllers
                 }
 
                 _mapper.Map(produtoDto, produto);
-                _context.SaveChanges();
+               await _context.SaveChangesAsync();
 
                 return Ok();
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -95,7 +94,7 @@ namespace FazendaSharpCity_API.Controllers
         {
             try
             {
-                var produto = _context.Produtos.FirstOrDefault(produto => produto.IdProduto == id);
+                var produto = await _context.Produtos.FirstOrDefaultAsync(produto => produto.IdProduto == id);
 
                 if (produto == null)
                 {
@@ -103,13 +102,12 @@ namespace FazendaSharpCity_API.Controllers
                 }
 
                 _context.Produtos.Remove(produto);
-                _context.SaveChanges();
+               await _context.SaveChangesAsync();
 
                 return Ok();
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

@@ -25,18 +25,19 @@ namespace FazendaSharpCity_API.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateClienteDto([FromBody] CreateClienteDto clienteDto)
+        public async Task<IActionResult> CreateClienteDto([FromBody] CreateClienteDto clienteDto)
         {
             try
             {
                 Cliente cliente = _mapper.Map<Cliente>(clienteDto);
-                _context.Clientes.Add(cliente);
-                _context.SaveChanges();
-                return CreatedAtAction(nameof(ReadClienteId), new { id = cliente.Id }, cliente);
+
+               await _context.Clientes.AddAsync(cliente);
+               await _context.SaveChangesAsync();
+
+               return CreatedAtAction(nameof(ReadClienteId), new { id = cliente.Id }, cliente);
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -76,7 +77,6 @@ namespace FazendaSharpCity_API.Controllers
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -86,7 +86,7 @@ namespace FazendaSharpCity_API.Controllers
         {
             try
             {
-                var cliente = await  _context.Clientes.FirstOrDefaultAsync(cliente => cliente.Id == id);
+                var cliente = await _context.Clientes.FirstOrDefaultAsync(cliente => cliente.Id == id);
 
                 if (cliente == null)
                 {
@@ -99,7 +99,6 @@ namespace FazendaSharpCity_API.Controllers
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -117,13 +116,12 @@ namespace FazendaSharpCity_API.Controllers
                 } 
 
                 _mapper.Map(clienteDto, cliente);
-                _context.SaveChanges();
+               await _context.SaveChangesAsync();
 
                 return NoContent();
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -141,12 +139,12 @@ namespace FazendaSharpCity_API.Controllers
                 } 
 
                 _context.Clientes.Remove(cliente);
-                _context.SaveChanges();
+               await _context.SaveChangesAsync();
+
                 return NoContent();
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
