@@ -4,8 +4,6 @@ namespace FazendaSharpCity_API.Data.DTOs.Venda
 {
     public class UpdateVendaDto
     {
-        public int IdVenda { get; set; }
-
         [Required(ErrorMessage = "O preço unitário é obrigatório.")]
         [Range(0.01, double.MaxValue, ErrorMessage = "O preço deve ser maior que zero.")]
         public decimal PrecoUnitario { get; set; }
@@ -17,7 +15,7 @@ namespace FazendaSharpCity_API.Data.DTOs.Venda
 
         [Required(ErrorMessage = "A forma de pagamento é obrigatória.")]
         [RegularExpression(@"^(Cartão|Dinheiro|Pix|Boleto)$", ErrorMessage = "A forma de pagamento deve ser Cartão, Dinheiro, Pix ou Boleto.")]
-        [MaxLength(20, ErrorMessage = "A forma de pagamento não pode exceder 20 caracteres.")]
+        [StringLength(20, ErrorMessage = "A forma de pagamento não pode exceder 20 caracteres.")]
         public string FormaDePagamento { get; set; }
 
         [Required(ErrorMessage = "A quantidade é obrigatória.")]

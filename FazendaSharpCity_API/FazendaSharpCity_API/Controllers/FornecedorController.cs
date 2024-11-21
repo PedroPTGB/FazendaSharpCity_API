@@ -39,9 +39,9 @@ namespace FazendaSharpCity_API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult>GetFornecedor(int id)
         {
-            var fornecedor = await _context.Fornecedores.FindAsync(id);
+            var fornecedor = await _context.Fornecedores.FirstOrDefaultAsync(fornecedor => fornecedor.Id == id);
 
-            if(fornecedor == null)
+            if (fornecedor == null)
             {
                 return NotFound();
             }

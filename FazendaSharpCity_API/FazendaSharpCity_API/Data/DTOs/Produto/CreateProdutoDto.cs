@@ -4,10 +4,8 @@ namespace FazendaSharpCity_API.Data.DTOs.Produto
 {
     public class CreateProdutoDto
     {
-        public int IdProduto { get; set; }
-
         [Required(ErrorMessage = "O nome do produto é obrigatório.")]
-        [MaxLength(100, ErrorMessage = "O nome do produto não pode exceder 100 caracteres.")]
+        [StringLength(100, ErrorMessage = "O nome do produto não pode exceder 100 caracteres.")]
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "A quantidade é obrigatória.")]
@@ -23,7 +21,7 @@ namespace FazendaSharpCity_API.Data.DTOs.Produto
         [Range(0.01, double.MaxValue, ErrorMessage = "O preço deve ser maior que zero.")]
         public decimal Preco { get; set; }
 
-        [MaxLength(500, ErrorMessage = "A descrição não pode exceder 500 caracteres.")]
+        [StringLength(500, ErrorMessage = "A descrição não pode exceder 500 caracteres.")]
         public string Descricao { get; set; }
     }
 }

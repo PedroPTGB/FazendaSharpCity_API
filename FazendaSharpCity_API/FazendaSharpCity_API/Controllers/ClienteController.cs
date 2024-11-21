@@ -24,7 +24,7 @@ namespace FazendaSharpCity_API.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost("{id}")]
+        [HttpPost]
         public IActionResult CreateClienteDto([FromBody] CreateClienteDto clienteDto)
         {
             try
@@ -41,7 +41,7 @@ namespace FazendaSharpCity_API.Controllers
             }
         }
 
-        [HttpGet("{id}")]
+        [HttpGet]
         public IEnumerable<ReadClienteDto> ReadCliente([FromQuery] int pageNumber = 1, int pageQtd = 10, string? nome = null)
         {
             try
