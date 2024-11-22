@@ -1,5 +1,6 @@
 ﻿
 using FazendaSharpCity_API.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -9,19 +10,33 @@ namespace FazendaSharpCity_API.Services
 {
     public class TokenService
     {
-        public TokenService() { }
+        private IConfiguration _configuration;
+        private UserManager<Usuario> _userManager;
 
-
-        public string GerarToken(Usuario usuario)
+        public TokenService(IConfiguration configuration, UserManager<Usuario> userManager)
         {
-            Claim[] claims = new Claim[]
+            _configuration = configuration;
+            _userManager = userManager;
+        }
+
+
+        public async Task<string> GerarToken(Usuario usuario)
+        {
+            var userRoles = await _userManager.GetRolesAsync(usuario);
+
+            var claims = new List<Claim>
             {
-                new Claim("login", usuario.UserName),
-                new Claim("id", usuario.Id),
-                new Claim(ClaimTypes.DateOfBirth, usuario.DataNascimento.ToString())
+                new Claim(ClaimTypes.Name, usuario.UserName),
+                new Claim("id", usuario.Id)//,
+                //new Claim("NivelGerencial", usuario.NivelGerencial.ToString())
             };
 
-            var chave = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("ahjqarpweoit34982431094hdfkajsdh98"));
+            foreach (var userRole in userRoles)
+            {
+                claims.Add(new Claim(ClaimTypes.Role, userRole));
+            }
+
+            var chave = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
 
             var signingCredentials = new SigningCredentials(chave, SecurityAlgorithms.HmacSha256);
 

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using FazendaSharpCity_API.Authorization;
 using FazendaSharpCity_API.Data.DTOs.Usuario;
 using FazendaSharpCity_API.Models;
 using Microsoft.AspNetCore.Identity;
@@ -12,13 +13,15 @@ namespace FazendaSharpCity_API.Services
         private UserManager<Usuario> _userManager;
         private SignInManager<Usuario> _signInManager;
         private TokenService _tokenService;
+        private RoleManager<IdentityRole> _roleManager;
 
-        public UsuarioService(UserManager<Usuario> userManager, IMapper mapper, SignInManager<Usuario> signInManager, TokenService tokenService)
+        public UsuarioService(UserManager<Usuario> userManager, IMapper mapper, SignInManager<Usuario> signInManager, TokenService tokenService, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _mapper = mapper;
             _signInManager = signInManager;
             _tokenService = tokenService;
+            _roleManager = roleManager;
         }
 
         public async Task Cadastra(CreateUsuarioDto usuarioDto)
@@ -28,6 +31,21 @@ namespace FazendaSharpCity_API.Services
 
             if (!resultado.Succeeded) throw new ApplicationException("Falha ao cadastrar usuáio!");
 
+        }
+
+        public async Task CadastraAdmin(CreateUsuarioDto usuarioDto)
+        {
+            Usuario usuario = _mapper.Map<Usuario>(usuarioDto);
+            IdentityResult resultado = await _userManager.CreateAsync(usuario, usuarioDto.Password);
+
+            if (!resultado.Succeeded) throw new ApplicationException("Falha ao cadastrar usuáio!");
+
+            if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
+                await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+            if (!await _roleManager.RoleExistsAsync(UserRoles.User))
+                await _roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+            if (await _roleManager.RoleExistsAsync(UserRoles.Admin))
+                await _userManager.AddToRoleAsync(usuario, UserRoles.Admin);
         }
 
         public async Task<string> LoginAsync(LoginUsuarioDto loginDto)
@@ -42,7 +60,7 @@ namespace FazendaSharpCity_API.Services
 
             var token = _tokenService.GerarToken(usuario);
 
-            return token;
+            return await token;
 
         }
 

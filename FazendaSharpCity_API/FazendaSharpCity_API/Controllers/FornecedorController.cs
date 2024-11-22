@@ -54,15 +54,12 @@ namespace FazendaSharpCity_API.Controllers
                 {
                     return NotFound();
                 }
-                else
-                {
-                    var fornecedorDto = _mapper.Map<ReadFornecedorDto>(fornecedor);
 
-                    return Ok(fornecedorDto);
-                }
+                var fornecedorDto = _mapper.Map<ReadFornecedorDto>(fornecedor);
+
+                return Ok(fornecedorDto);
             }
-
-            catch (Exception)
+            catch (Exception) 
             {
                 throw;
             }

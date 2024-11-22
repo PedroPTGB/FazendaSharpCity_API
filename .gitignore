@@ -515,3 +515,8 @@ FodyWeavers.xsd
 /FazendaSharpCity_API/FazendaSharpCity_API/bin/Debug/net8.0/ru/Microsoft.CodeAnalysis.CSharp.Workspaces.resources.dll
 /FazendaSharpCity_API/FazendaSharpCity_API/bin/Debug/net8.0/ru/Microsoft.CodeAnalysis.resources.dll
 /FazendaSharpCity_API/FazendaSharpCity_API/bin/Debug/net8.0/ru/Microsoft.CodeAnalysis.Workspaces.resources.dll
+
+
+# appsettings
+
+#appsettings.json

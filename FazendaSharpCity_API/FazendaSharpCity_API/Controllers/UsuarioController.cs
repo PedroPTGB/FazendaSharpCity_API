@@ -19,14 +19,21 @@ namespace FazendaSharpCity_API.Controllers
             _usuarioService = usuarioService;
         }
 
-        [HttpPost("cadastro")]
+        [HttpPost("Cadastro")]
         public async Task<IActionResult> CadatraUsuario(CreateUsuarioDto usuarioDto)
         {
             await _usuarioService.Cadastra(usuarioDto);
             return Ok("Usuário cadastrado!");
         }
 
-        [HttpPost("login")]
+        [HttpPost("CadastroAdmin")]
+        public async Task<IActionResult> CadatraAmin(CreateUsuarioDto usuarioDto)
+        {
+            await _usuarioService.CadastraAdmin(usuarioDto);
+            return Ok("Usuário cadastrado!");
+        }
+
+        [HttpPost("Login")]
         public async Task<IActionResult> LoginAsync(LoginUsuarioDto loginDto)
         {
             var token = await _usuarioService.LoginAsync(loginDto);

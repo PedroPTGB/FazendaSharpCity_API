@@ -1,5 +1,15 @@
 [
   {
+    "ContainingType": "FazendaSharpCity_API.Controllers.AcessoController",
+    "Method": "Get",
+    "RelativePath": "Acesso",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "FazendaSharpCity_API.Controllers.ClienteController",
     "Method": "CreateClienteDto",
     "RelativePath": "Cliente",
@@ -106,7 +116,7 @@
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.EnderecoController",
-    "Method": "AdicionaEndereco",
+    "Method": "CreateEndereco",
     "RelativePath": "Endereco",
     "HttpMethod": "POST",
     "IsController": true,
@@ -142,7 +152,7 @@
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.EnderecoController",
-    "Method": "RecuperaEnderecosPorId",
+    "Method": "ReadEndereco",
     "RelativePath": "Endereco/{id}",
     "HttpMethod": "GET",
     "IsController": true,
@@ -158,7 +168,7 @@
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.EnderecoController",
-    "Method": "AtualizaEndereco",
+    "Method": "UpdateEndereco",
     "RelativePath": "Endereco/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
@@ -317,7 +327,7 @@
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.FuncionarioController",
-    "Method": "DeleteFuncionario",
+    "Method": "DeletarFuncionario",
     "RelativePath": "Funcionario/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
@@ -403,7 +413,23 @@
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.UsuarioController",
     "Method": "CadatraUsuario",
-    "RelativePath": "Usuario/cadastro",
+    "RelativePath": "Usuario/Cadastro",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "usuarioDto",
+        "Type": "FazendaSharpCity_API.Data.DTOs.Usuario.CreateUsuarioDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FazendaSharpCity_API.Controllers.UsuarioController",
+    "Method": "CadatraAmin",
+    "RelativePath": "Usuario/CadastroAdmin",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -419,7 +445,7 @@
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.UsuarioController",
     "Method": "LoginAsync",
-    "RelativePath": "Usuario/login",
+    "RelativePath": "Usuario/Login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

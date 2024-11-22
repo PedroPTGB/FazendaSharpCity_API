@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.OpenApi.Extensions;
+using System.ComponentModel.DataAnnotations;
 
 namespace FazendaSharpCity_API.Data.DTOs.Usuario
 {
@@ -7,12 +8,10 @@ namespace FazendaSharpCity_API.Data.DTOs.Usuario
         [Required]
         public string Username { get; set; }
         [Required]
-        public DateTime DataNascimento { get; set; }
-        [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
-        [Required]
-        [Compare("Password")]
-        public string RePassword { get; set; }
+
+        //[Required]
+        //public bool NivelGerencial { get; set; }
     }
 }
