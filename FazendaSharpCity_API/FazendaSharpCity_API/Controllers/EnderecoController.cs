@@ -4,6 +4,7 @@ using FazendaSharpCity_API.Data.DTOs.Endereco;
 using FazendaSharpCity_API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.EntityFrameworkCore;
 
 namespace FazendaSharpCity_API.Controllers
 {
@@ -21,12 +22,22 @@ namespace FazendaSharpCity_API.Controllers
         }
 
         [HttpPost]
-        public IActionResult AdicionaEndereco([FromBody] CreateEnderecoDto enderecoDto)
+        public async Task<IActionResult> CreateEndereco([FromBody] CreateEnderecoDto enderecoDto)
         {
-            Endereco endereco = _mapper.Map<Endereco>(enderecoDto);
-            _context.Enderecos.Add(endereco);
-            _context.SaveChanges();
-            return CreatedAtAction(nameof(RecuperaEnderecosPorId), new { Id = endereco.Id }, endereco);
+            try
+            {
+                Endereco endereco = _mapper.Map<Endereco>(enderecoDto);
+
+                await _context.Enderecos.AddAsync(endereco);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction(nameof(ReadEndereco), new { Id = endereco.Id }, endereco);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         [HttpGet]
@@ -36,43 +47,73 @@ namespace FazendaSharpCity_API.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult RecuperaEnderecosPorId(int id)
+        public async Task<IActionResult> ReadEndereco(int id)
         {
-            Endereco endereco = _context.Enderecos.FirstOrDefault(endereco => endereco.Id == id);
-            if (endereco != null)
+            try
             {
-                ReadEnderecoDto enderecoDto = _mapper.Map<ReadEnderecoDto>(endereco);
+                Endereco endereco = await _context.Enderecos.FirstOrDefaultAsync(endereco => endereco.Id == id);
 
-                return Ok(enderecoDto);
+                if (endereco != null)
+                {
+                    ReadEnderecoDto enderecoDto = _mapper.Map<ReadEnderecoDto>(endereco);
+
+                    return Ok(enderecoDto);
+                }
+
+                return NotFound();
             }
-            return NotFound();
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         [HttpPut("{id}")]
-        public IActionResult AtualizaEndereco(int id, [FromBody] UpdateEnderecoDto enderecoDto)
+        public async Task<IActionResult> UpdateEndereco(int id, [FromBody] UpdateEnderecoDto enderecoDto)
         {
-            Endereco endereco = _context.Enderecos.FirstOrDefault(endereco => endereco.Id == id);
-            if (endereco == null)
+            try
             {
-                return NotFound();
+                Endereco endereco = await _context.Enderecos.FirstOrDefaultAsync(endereco => endereco.Id == id);
+
+                if (endereco == null)
+                {
+                    return NotFound();
+                }
+
+                _mapper.Map(enderecoDto, endereco);
+                await _context.SaveChangesAsync();
+
+                return NoContent();
+            }            
+            catch (Exception)
+            {
+                throw;
             }
-            _mapper.Map(enderecoDto, endereco);
-            _context.SaveChanges();
-            return NoContent();
         }
 
 
         [HttpDelete("{id}")]
-        public IActionResult DeletaEndereco(int id)
+        public async Task<IActionResult> DeletaEndereco(int id)
         {
-            Endereco endereco = _context.Enderecos.FirstOrDefault(endereco => endereco.Id == id);
-            if (endereco == null)
+            try
             {
-                return NotFound();
+                Endereco endereco = await _context.Enderecos.FirstOrDefaultAsync(endereco => endereco.Id == id);
+
+                if (endereco == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Remove(endereco);
+                await _context.SaveChangesAsync();
+
+                return NoContent();
             }
-            _context.Remove(endereco);
-            _context.SaveChanges();
-            return NoContent();
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
     }

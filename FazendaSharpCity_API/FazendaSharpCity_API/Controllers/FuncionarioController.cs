@@ -4,6 +4,7 @@ using FazendaSharpCity_API.Data.DTOs.Cliente;
 using FazendaSharpCity_API.Data.DTOs.Funcionario;
 using FazendaSharpCity_API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FazendaSharpCity_API.Controllers
 {
@@ -22,67 +23,95 @@ namespace FazendaSharpCity_API.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult>CreateFuncionario([FromBody] CreateFuncionarioDto funcionarioDto)
+        public async Task<IActionResult> CreateFuncionario([FromBody] CreateFuncionarioDto funcionarioDto)
         {
-            Funcionario funcionario = _mapper.Map<Funcionario>(funcionarioDto);
-
-            if(funcionario == null)
+            try
             {
-                return BadRequest("Funcionadrio não pode ser nulo");
+                Funcionario funcionario = _mapper.Map<Funcionario>(funcionarioDto);
+
+                if (funcionario == null)
+                {
+                    return BadRequest("Funcionadrio não pode ser nulo");
+                }
+
+                await _context.Funcionarios.AddAsync(funcionario);
+                await _context.SaveChangesAsync();
+
+                return CreatedAtAction(nameof(GetFuncionario), new { id = funcionario.Id }, funcionario.Id);
             }
-
-            await _context.Funcionarios.AddAsync(funcionario);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetFuncionario), new { id = funcionario.Id }, funcionario.Id);
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         [HttpGet("{id}")]
 
-        public async Task<IActionResult>GetFuncionario(int id)
+        public async Task<IActionResult> GetFuncionario(int id)
         {
-            var funcionario = await _context.Funcionarios.FindAsync(id);
+            try
+            {
+                var funcionario = await _context.Funcionarios.FindAsync(id);
 
-            if(funcionario == null)
-            {
-                return NotFound();
+                if (funcionario == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(funcionario);
+                }
             }
-            else
+            catch (Exception)
             {
-                return Ok(funcionario);
+                throw;
             }
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult>UpdateFuncionario(int id, [FromBody] UpdateFuncionarioDto funcionarioDto)
+        public async Task<IActionResult> UpdateFuncionario(int id, [FromBody] UpdateFuncionarioDto funcionarioDto)
         {
-            var funcionario = _context.Funcionarios.FirstOrDefault(fornecedor => fornecedor.Id == id);
-
-            if (funcionario == null)
+            try
             {
-                return NotFound();
+                var funcionario = await _context.Funcionarios.FirstOrDefaultAsync(fornecedor => fornecedor.Id == id);
+
+                if (funcionario == null)
+                {
+                    return NotFound();
+                }
+
+                _mapper.Map(funcionarioDto, funcionario);
+                await _context.SaveChangesAsync();
+
+                return Ok(funcionario);
             }
-
-            _mapper.Map(funcionarioDto, funcionario);
-            _context.SaveChanges();
-
-            return Ok(funcionario);
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult>DeleteFuncionario(int id)
+        public async Task<IActionResult> DeletarFuncionario(int id)
         {
-            var funcionario = _context.Funcionarios.FirstOrDefault(funcionario => funcionario.Id == id);
-
-            if(funcionario == null)
+            try
             {
-                return NotFound();
+                var funcionario = await _context.Funcionarios.FirstOrDefaultAsync(funcionario => funcionario.Id == id);
+
+                if (funcionario == null)
+                {
+                    return NotFound();
+                }
+
+                _context.Funcionarios.Remove(funcionario);
+                await _context.SaveChangesAsync();
+
+                return Ok();
             }
-
-            _context.Funcionarios.Remove(funcionario);
-            _context.SaveChanges();
-
-            return Ok();
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
     }
