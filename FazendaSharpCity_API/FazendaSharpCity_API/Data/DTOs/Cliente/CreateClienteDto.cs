@@ -19,9 +19,6 @@ namespace FazendaSharpCity_API.Data.DTOs.Cliente
         //[Required(ErrorMessage = "O CNPJ é obrigatório")]
         [RegularExpression(@"\d{14}", ErrorMessage = "O CNPJ deve conter apenas números e possuir 14 caracteres")]
         public string? CNPJ { get; set; }
-        [Required(ErrorMessage = "O Sexo é obrigatório")]
-        [RegularExpression(@"/^[M,F,I,m,f,i]/", ErrorMessage = "O Sexo deve ser escolhido entre Masculino (M), feminino (F) ou não binário(I)")]
-        public char Sexo { get; set; }
         [Required(ErrorMessage = "A data de nascimento é obrigatória")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]

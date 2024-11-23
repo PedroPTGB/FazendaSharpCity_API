@@ -12,7 +12,6 @@ namespace FazendaSharpCity_API.Data.DTOs.Cliente
         public string Email { get; set; }
         public string CPF { get; set; }
         public string? CNPJ { get; set; }
-        public char Sexo { get; set; }
         public DateTime DataNascimento { get; set; }
         public ReadEnderecoDto Endereco { get; set; }
         public bool TipoPessoa { get; set; }

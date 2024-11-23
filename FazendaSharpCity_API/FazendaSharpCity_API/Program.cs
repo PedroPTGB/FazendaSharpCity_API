@@ -42,15 +42,13 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddSingleton<IAuthorizationHandler, NivelGerencialAuthorization>();
 
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("NivelGerencial", policy => policy.AddRequirements(new NivelGerencial(true))
-    );
-    options.AddPolicy("IsFuncionario", policy => policy.AddRequirements(new IsFuncionario(true))
-    );
-    options.AddPolicy("TempoDeAcessoToken", policy => policy.AddRequirements(new TempoDeAcessoToken(true))
-    );
-});
+builder.Services.AddAuthorizationBuilder()
+    .AddPolicy("NivelGerencial", policy => policy.AddRequirements(new NivelGerencial(true))
+)
+    .AddPolicy("IsFuncionario", policy => policy.AddRequirements(new IsFuncionario(true))
+)
+    .AddPolicy("TempoDeAcessoToken", policy => policy.AddRequirements(new TempoDeAcessoToken(true))
+);
 
 builder.Services.AddScoped<UsuarioService>();
 builder.Services.AddScoped<TokenService>();
