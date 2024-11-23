@@ -5,8 +5,6 @@ VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FazendaSharpCity_API", "FazendaSharpCity_API\FazendaSharpCity_API.csproj", "{1226735D-B712-44A1-9A8C-40A704DD979F}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{331F9179-AC69-45F0-927D-100C8DC2F17D}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{1226735D-B712-44A1-9A8C-40A704DD979F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1226735D-B712-44A1-9A8C-40A704DD979F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1226735D-B712-44A1-9A8C-40A704DD979F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{331F9179-AC69-45F0-927D-100C8DC2F17D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{331F9179-AC69-45F0-927D-100C8DC2F17D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{331F9179-AC69-45F0-927D-100C8DC2F17D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{331F9179-AC69-45F0-927D-100C8DC2F17D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
