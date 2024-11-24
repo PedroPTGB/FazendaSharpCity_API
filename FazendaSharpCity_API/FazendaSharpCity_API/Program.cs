@@ -82,9 +82,13 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+app.UseRouting();
 
 app.UseAuthentication();
+
+app.UseAuthorization();
+
+//app.UseEndpoints(e => { });
 
 app.MapControllers();
 

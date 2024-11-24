@@ -11,9 +11,18 @@ namespace FazendaSharpCity_API.Controllers
     {
         [HttpGet]
         //[Authorize(Policy = "NivelGerencial")]
-        //[Authorize(Roles =UserRoles.Admin)]
-        //[Authorize]
+        //[Authorize(Roles = UserRoles.Admin)]
+        [Authorize]
         public IActionResult Get()
+        {
+            return Ok("Acesso Permitido");
+        }
+
+        [HttpGet("AcessoAdmin")]
+        //[Authorize(Policy = "NivelGerencial")]
+        [Authorize(Roles = UserRoles.Admin)]
+        //[Authorize]
+        public IActionResult Getadmin()
         {
             return Ok("Acesso Permitido");
         }

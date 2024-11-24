@@ -10,6 +10,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "FazendaSharpCity_API.Controllers.AcessoController",
+    "Method": "Getadmin",
+    "RelativePath": "Acesso/AcessoAdmin",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "FazendaSharpCity_API.Controllers.ClienteController",
     "Method": "CreateClienteDto",
     "RelativePath": "Cliente",

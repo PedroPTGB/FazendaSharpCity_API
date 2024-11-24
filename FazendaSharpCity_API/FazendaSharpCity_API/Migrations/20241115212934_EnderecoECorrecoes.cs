@@ -16,7 +16,7 @@ namespace FazendaSharpCity_API.Migrations
                 name: "Enderecos",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "serial", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Logradouro = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
                     Complemento = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
