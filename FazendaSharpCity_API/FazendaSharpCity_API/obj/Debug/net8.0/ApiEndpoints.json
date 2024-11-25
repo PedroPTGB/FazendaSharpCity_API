@@ -467,5 +467,21 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FazendaSharpCity_API.Controllers.VendaController",
+    "Method": "GetVenda",
+    "RelativePath": "Venda/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
   }
 ]
