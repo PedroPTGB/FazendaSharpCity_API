@@ -19,7 +19,7 @@ namespace FazendaSharpCity_API.Controllers
             _usuarioService = usuarioService;
         }
 
-        [HttpPost("Cadastro")]
+        [HttpPost("CadastroFunci")]
         public async Task<IActionResult> CadatraUsuario(CreateUsuarioDto usuarioDto)
         {
             await _usuarioService.Cadastra(usuarioDto);

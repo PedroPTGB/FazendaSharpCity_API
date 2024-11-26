@@ -19,6 +19,8 @@ namespace FazendaSharpCity_API.Models
         [Required(ErrorMessage = "O e-mail é obrigatório.")]
         [EmailAddress(ErrorMessage = "O e-mail deve estar em um formato válido.")]
         public string Email { get; set; }
+
+        [Required(ErrorMessage = "O id do endereco é obrigatório")]
         public int EnderecoId { get; set; }
 
         [RegularExpression(@"^\(?\d{2}\)?[\s-]?[\d]{4,5}-?[\d]{4}$", ErrorMessage = "O telefone deve estar em um formato válido (ex: (99) 99999-9999).")]

@@ -9,9 +9,14 @@ namespace FazendaSharpCity_API.Models
         [Key]
         [Required]
         public int IdVenda { get; set; }
-        [Required(ErrorMessage = "O preço unitário é obrigatório.")]
+
+        [Required(ErrorMessage = "O preço de venda é obrigatório.")]
         [Range(0.01, double.MaxValue, ErrorMessage = "O preço deve ser maior que zero.")]
-        public decimal PrecoUnitario { get; set; }
+        public decimal PrecoVenda { get; set; }
+
+        [Required(ErrorMessage = "O preço de compra é obrigatório.")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "O preço deve ser maior que zero.")]
+        public decimal PrecoCompra { get; set; }
 
         [Required(ErrorMessage = "A data da venda é obrigatória.")]
         [DataType(DataType.Date)]

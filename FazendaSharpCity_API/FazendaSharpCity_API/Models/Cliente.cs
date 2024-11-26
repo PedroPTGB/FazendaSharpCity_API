@@ -18,30 +18,15 @@ namespace FazendaSharpCity_API.Models
         [Required(ErrorMessage = "O e-mail é obrigatório.")]
         [EmailAddress(ErrorMessage = "O e-mail deve ser válido.")]
         public string Email { get; set; }
-        [Required(ErrorMessage = "O CPF é obrigatório")]
+
         [RegularExpression(@"\d{11}", ErrorMessage = "O CPF deve conter apenas números e possuir 11 caracteres")]
-        public string CPF { get; set; }
-        //[Required(ErrorMessage = "O CNPJ é obrigatório")]
+        public string? CPF { get; set; }
         [RegularExpression(@"\d{14}", ErrorMessage = "O CNPJ deve conter apenas números e possuir 14 caracteres")]
         public string? CNPJ { get; set; }
-        
-        [Required(ErrorMessage = "A data de nascimento é obrigatória")]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime DataNascimento { get; set; }
 
-        public bool TipoPessoa { get; set; }
-
+        [Required(ErrorMessage = "O id do endereco é obrigatório")]
         public int EnderecoId { get; set; }
 
         public virtual Endereco Endereco { get; set; }
-
-        public Cliente()
-        {
-            if (CPF != null)
-                TipoPessoa = true;
-            else
-                TipoPessoa = false;
-        }
     }
 }

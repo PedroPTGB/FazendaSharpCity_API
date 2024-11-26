@@ -26,6 +26,8 @@ namespace FazendaSharpCity_API.Models
         [Required(ErrorMessage = "O e-mail é obrigatório.")]
         [EmailAddress(ErrorMessage = "O e-mail deve estar em um formato válido.")]
         public string Email { get; set; }
+
+        [Required(ErrorMessage = "O id do endereco é obrigatório")]
         public int EnderecoId { get; set; }
         public virtual Endereco Endereco { get; set; }
 

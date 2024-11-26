@@ -40,15 +40,6 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-builder.Services.AddSingleton<IAuthorizationHandler, NivelGerencialAuthorization>();
-
-builder.Services.AddAuthorizationBuilder()
-    .AddPolicy("NivelGerencial", policy => policy.AddRequirements(new NivelGerencial(true))
-)
-    .AddPolicy("IsFuncionario", policy => policy.AddRequirements(new IsFuncionario(true))
-)
-    .AddPolicy("TempoDeAcessoToken", policy => policy.AddRequirements(new TempoDeAcessoToken(true))
-);
 
 builder.Services.AddScoped<UsuarioService>();
 builder.Services.AddScoped<TokenService>();
@@ -56,7 +47,7 @@ builder.Services.AddScoped<TokenService>();
 builder.Services.Configure<IdentityOptions>(options =>
 {
     // Non Default Password settings.
-    options.Password.RequireDigit = true;
+    options.Password.RequireDigit = false;
     options.Password.RequireLowercase = false;
     options.Password.RequireNonAlphanumeric = false;
     options.Password.RequireUppercase = false;

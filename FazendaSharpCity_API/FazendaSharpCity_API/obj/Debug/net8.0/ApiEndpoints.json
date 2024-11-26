@@ -422,8 +422,8 @@
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.UsuarioController",
-    "Method": "CadatraUsuario",
-    "RelativePath": "Usuario/Cadastro",
+    "Method": "CadatraAmin",
+    "RelativePath": "Usuario/CadastroAdmin",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -438,8 +438,8 @@
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.UsuarioController",
-    "Method": "CadatraAmin",
-    "RelativePath": "Usuario/CadastroAdmin",
+    "Method": "CadatraUsuario",
+    "RelativePath": "Usuario/CadastroFunci",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,

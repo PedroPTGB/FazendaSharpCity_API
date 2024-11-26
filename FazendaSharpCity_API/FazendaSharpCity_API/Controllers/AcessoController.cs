@@ -10,7 +10,6 @@ namespace FazendaSharpCity_API.Controllers
     public class AcessoController : ControllerBase
     {
         [HttpGet]
-        //[Authorize(Policy = "NivelGerencial")]
         //[Authorize(Roles = UserRoles.Admin)]
         [Authorize]
         public IActionResult Get()
@@ -19,7 +18,6 @@ namespace FazendaSharpCity_API.Controllers
         }
 
         [HttpGet("AcessoAdmin")]
-        //[Authorize(Policy = "NivelGerencial")]
         [Authorize(Roles = UserRoles.Admin)]
         //[Authorize]
         public IActionResult Getadmin()
