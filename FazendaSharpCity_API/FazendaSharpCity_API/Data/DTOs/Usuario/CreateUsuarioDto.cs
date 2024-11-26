@@ -9,7 +9,7 @@ namespace FazendaSharpCity_API.Data.DTOs.Usuario
         public string Username { get; set; }
         [Required]
         [DataType(DataType.Password)]
-        [StringLength(6, ErrorMessage = "A senha deve ter no minimo 6 caracteres")]
+        [MinLength(6, ErrorMessage = "A senha deve ter no minimo 6 caracteres")]
         public string Password { get; set; }
     }
 }

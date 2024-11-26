@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 
 namespace FazendaSharpCity_API.Models
 {
-    public class Venda
+    public class Venda : IValidatableObject
     {
         [Key]
         [Required]
@@ -20,8 +21,16 @@ namespace FazendaSharpCity_API.Models
 
         [Required(ErrorMessage = "A data da venda é obrigatória.")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime DtVenda { get; set; }
+        [DisplayFormat(DataFormatString = "dd/MM/yyyy")]
+        public DateOnly DataDaVenda {  get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (DataDaVenda > DateOnly.FromDateTime(DateTime.Today))
+            {
+                yield return new ValidationResult("Apenas pode ser registrada uma venda realizada, nesta data ou em uma data passada.", new[] { "DataDaVenda" });
+            }
+        }
 
         [Required(ErrorMessage = "A forma de pagamento é obrigatória.")]
         [RegularExpression(@"^(Cartão|Dinheiro|Pix|Boleto)$", ErrorMessage = "A forma de pagamento deve ser Cartão, Dinheiro, Pix ou Boleto.")]

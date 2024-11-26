@@ -2,7 +2,7 @@
 
 namespace FazendaSharpCity_API.Data.DTOs.Venda
 {
-    public class UpdateVendaDto
+    public class UpdateVendaDto: IValidatableObject
     {
         [Required(ErrorMessage = "O preço de venda é obrigatório.")]
         [Range(0.01, double.MaxValue, ErrorMessage = "O preço deve ser maior que zero.")]
@@ -14,8 +14,15 @@ namespace FazendaSharpCity_API.Data.DTOs.Venda
 
         [Required(ErrorMessage = "A data da venda é obrigatória.")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public DateTime DataDaVenda { get; set; }
+        [DisplayFormat(DataFormatString = "dd/mm/yyyy")]
+        public DateOnly DataDaVenda { get; set; }
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (DataDaVenda > DateOnly.FromDateTime(DateTime.Today))
+            {
+                yield return new ValidationResult("Apenas pode ser registrada uma venda realizada, nesta data ou em uma data passada.", new[] { "DataDaVenda" });
+            }
+        }
 
         [Required(ErrorMessage = "A forma de pagamento é obrigatória.")]
         [RegularExpression(@"^(Cartão|Dinheiro|Pix|Boleto)$", ErrorMessage = "A forma de pagamento deve ser Cartão, Dinheiro, Pix ou Boleto.")]

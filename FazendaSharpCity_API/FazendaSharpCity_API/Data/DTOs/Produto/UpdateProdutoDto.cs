@@ -2,7 +2,7 @@
 
 namespace FazendaSharpCity_API.Data.DTOs.Produto
 {
-    public class UpdateProdutoDto
+    public class UpdateProdutoDto : IValidatableObject
     {
         [Required(ErrorMessage = "O nome do produto é obrigatório.")]
         [StringLength(100, ErrorMessage = "O nome do produto não pode exceder 100 caracteres.")]
@@ -14,9 +14,15 @@ namespace FazendaSharpCity_API.Data.DTOs.Produto
 
         [Required(ErrorMessage = "A data de validade é obrigatória.")]
         [DataType(DataType.DateTime)]
-        //[DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        //[DisplayFormat(DataFormatString = "dd/mm/yyyy")]
-        public DateTime Validade { get; set; }
+        [DisplayFormat(DataFormatString = "dd/mm/yyyy")]
+        public DateOnly Validade { get; set; }
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (Validade < DateOnly.FromDateTime(DateTime.Today))
+            {
+                yield return new ValidationResult("Não pode ser registrado um produto vencido.", new[] { "DataDaVenda" });
+            }
+        }
 
         [Required(ErrorMessage = "O preço do produto é obrigatório.")]
         [Range(0.01, double.MaxValue, ErrorMessage = "O preço deve ser maior que zero.")]
