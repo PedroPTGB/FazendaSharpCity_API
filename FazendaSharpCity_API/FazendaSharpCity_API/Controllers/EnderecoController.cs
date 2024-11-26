@@ -2,6 +2,7 @@
 using FazendaSharpCity_API.Data.Contexts;
 using FazendaSharpCity_API.Data.DTOs.Endereco;
 using FazendaSharpCity_API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,7 @@ namespace FazendaSharpCity_API.Controllers
             _mapper = mapper;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateEndereco([FromBody] CreateEnderecoDto enderecoDto)
         {
@@ -40,12 +42,14 @@ namespace FazendaSharpCity_API.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public IEnumerable<ReadEnderecoDto> RecuperaEnderecos()
         {
             return _mapper.Map<List<ReadEnderecoDto>>(_context.Enderecos);
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> ReadEndereco(int id)
         {
@@ -69,6 +73,7 @@ namespace FazendaSharpCity_API.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateEndereco(int id, [FromBody] UpdateEnderecoDto enderecoDto)
         {
@@ -92,7 +97,7 @@ namespace FazendaSharpCity_API.Controllers
             }
         }
 
-
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletaEndereco(int id)
         {

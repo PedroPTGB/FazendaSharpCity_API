@@ -4,6 +4,7 @@ using FazendaSharpCity_API.Data.Contexts;
 using FazendaSharpCity_API.Data.DTOs.Fornecedor;
 using FazendaSharpCity_API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FazendaSharpCity_API.Controllers
 {
@@ -20,6 +21,7 @@ namespace FazendaSharpCity_API.Controllers
             _mapper = mapper;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateFornecedor([FromBody] CreateFornecedorDto fornecedorDto)
         {
@@ -43,6 +45,7 @@ namespace FazendaSharpCity_API.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetFornecedor(int id)
         {
@@ -65,6 +68,7 @@ namespace FazendaSharpCity_API.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateFornecedor(int id, [FromBody] UpdateFornecedorDto fornecedorDto)
         {
@@ -88,6 +92,7 @@ namespace FazendaSharpCity_API.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteFornecedor(int id)
         {

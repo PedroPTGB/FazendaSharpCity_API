@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using FazendaSharpCity_API.Authorization;
 using FazendaSharpCity_API.Data.Contexts;
 using FazendaSharpCity_API.Data.DTOs.Venda;
 using FazendaSharpCity_API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,6 +21,7 @@ namespace FazendaSharpCity_API.Controllers
             _mapper = mapper;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateVenda([FromBody] CreateVendaDto vendaDto)
         {
@@ -42,12 +45,14 @@ namespace FazendaSharpCity_API.Controllers
             }
         }
 
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpGet]
         public IEnumerable<ReadVendaDto> ListaVendas([FromQuery] int pageNumber = 1, int pageQtd = 10)
         {
             return _mapper.Map<IEnumerable<ReadVendaDto>>(_context.Vendas.Skip((pageNumber - 1) * pageQtd).Take(pageQtd));
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetVenda(int id)
         {
@@ -70,6 +75,7 @@ namespace FazendaSharpCity_API.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut]
         public async Task<IActionResult> UpdateVendaDto(int id, [FromBody] UpdateVendaDto vendaDto)
         {
@@ -93,6 +99,7 @@ namespace FazendaSharpCity_API.Controllers
             }
         }
 
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteVenda(int id)
         {

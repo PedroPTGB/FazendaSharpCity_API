@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using FazendaSharpCity_API.Authorization;
 using FazendaSharpCity_API.Data.Contexts;
 using FazendaSharpCity_API.Data.DTOs.Cliente;
 using FazendaSharpCity_API.Data.DTOs.Funcionario;
 using FazendaSharpCity_API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,8 +23,9 @@ namespace FazendaSharpCity_API.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost]
 
+        [Authorize(Roles = UserRoles.Admin)]
+        [HttpPost]
         public async Task<IActionResult> CreateFuncionario([FromBody] CreateFuncionarioDto funcionarioDto)
         {
             try
@@ -44,9 +47,9 @@ namespace FazendaSharpCity_API.Controllers
                 throw;
             }
         }
-
+        
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpGet("{id}")]
-
         public async Task<IActionResult> GetFuncionario(int id)
         {
             try
@@ -67,7 +70,8 @@ namespace FazendaSharpCity_API.Controllers
                 throw;
             }
         }
-
+        
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateFuncionario(int id, [FromBody] UpdateFuncionarioDto funcionarioDto)
         {
@@ -90,7 +94,8 @@ namespace FazendaSharpCity_API.Controllers
                 throw;
             }
         }
-
+        
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletarFuncionario(int id)
         {

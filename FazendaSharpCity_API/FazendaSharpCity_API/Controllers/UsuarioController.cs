@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
+using FazendaSharpCity_API.Authorization;
 using FazendaSharpCity_API.Data.Contexts;
 using FazendaSharpCity_API.Data.DTOs.Usuario;
 using FazendaSharpCity_API.Models;
 using FazendaSharpCity_API.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +21,7 @@ namespace FazendaSharpCity_API.Controllers
             _usuarioService = usuarioService;
         }
 
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpPost("CadastroFunci")]
         public async Task<IActionResult> CadatraUsuario(CreateUsuarioDto usuarioDto)
         {
@@ -26,6 +29,7 @@ namespace FazendaSharpCity_API.Controllers
             return Ok("Usuário cadastrado!");
         }
 
+        [Authorize(Roles = UserRoles.Admin)]
         [HttpPost("CadastroAdmin")]
         public async Task<IActionResult> CadatraAmin(CreateUsuarioDto usuarioDto)
         {

@@ -2,6 +2,7 @@
 using FazendaSharpCity_API.Data.Contexts;
 using FazendaSharpCity_API.Data.DTOs.Cliente;
 using FazendaSharpCity_API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,7 @@ namespace FazendaSharpCity_API.Controllers
             _mapper = mapper;
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> CreateClienteDto([FromBody] CreateClienteDto clienteDto)
         {
@@ -42,6 +44,7 @@ namespace FazendaSharpCity_API.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet]
         public IEnumerable<ReadClienteDto> ReadCliente([FromQuery] int pageNumber = 1, int pageQtd = 10, string? nome = null)
         {
@@ -81,6 +84,7 @@ namespace FazendaSharpCity_API.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> ReadClienteId(int id) 
         {
@@ -103,6 +107,7 @@ namespace FazendaSharpCity_API.Controllers
             }
         }
 
+        [Authorize]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateCliente(int id, [FromBody] UpdateClienteDto clienteDto)
         {
@@ -126,6 +131,7 @@ namespace FazendaSharpCity_API.Controllers
             }
         }
 
+        [Authorize]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCliente(int id)
         {
