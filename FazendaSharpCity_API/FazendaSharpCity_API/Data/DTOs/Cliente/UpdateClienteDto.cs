@@ -23,8 +23,6 @@ namespace FazendaSharpCity_API.Data.DTOs.Cliente
         [RegularExpression(@"\d{14}", ErrorMessage = "O CNPJ deve conter apenas números e possuir 14 caracteres")]
         public string? CNPJ { get; set; }
 
-        public bool TipoPessoa { get; set; }
-
         [Required(ErrorMessage = "O id do endereco é obrigatório")]
         public int EnderecoId { get; set; }
     }

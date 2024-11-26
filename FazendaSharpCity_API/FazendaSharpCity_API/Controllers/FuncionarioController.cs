@@ -51,16 +51,16 @@ namespace FazendaSharpCity_API.Controllers
         {
             try
             {
-                var funcionario = await _context.Funcionarios.FindAsync(id);
+                var funcionario = await _context.Funcionarios.FirstOrDefaultAsync(funcionario => funcionario.Id == id);
 
                 if (funcionario == null)
                 {
                     return NotFound();
                 }
-                else
-                {
-                    return Ok(funcionario);
-                }
+
+                var funcionarioDto = _mapper.Map<ReadFuncionarioDto>(funcionario);
+                return Ok(funcionarioDto);
+
             }
             catch (Exception)
             {

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using FazendaSharpCity_API.Data.Contexts;
+using FazendaSharpCity_API.Data.DTOs.Endereco;
 using FazendaSharpCity_API.Data.DTOs.Produto;
+using FazendaSharpCity_API.Data.DTOs.Venda;
 using FazendaSharpCity_API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -38,6 +40,12 @@ namespace FazendaSharpCity_API.Controllers
             }
         }
 
+        [HttpGet]
+        public IEnumerable<ReadProdutoDto> ListaProdutos([FromQuery] int pageNumber = 1, int pageQtd = 10)
+        {
+            return _mapper.Map<IEnumerable<ReadProdutoDto>>(_context.Produtos.Skip((pageNumber - 1) * pageQtd).Take(pageQtd));
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProduto(int id)
         {
@@ -49,10 +57,10 @@ namespace FazendaSharpCity_API.Controllers
                 {
                     return NotFound();
                 }
-                else
-                {
-                    return Ok(produto);
-                }
+
+                var produtoDto = _mapper.Map<ReadProdutoDto>(produto);
+                return Ok(produtoDto);
+
             }
             catch (Exception)
             {
