@@ -7,6 +7,7 @@ using FazendaSharpCity_API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace FazendaSharpCity_API.Controllers
 {
@@ -25,7 +26,10 @@ namespace FazendaSharpCity_API.Controllers
         [HttpPost("CadastroFunci")]
         public async Task<IActionResult> CadatraUsuario(CreateUsuarioDto usuarioDto)
         {
+            Log.Information("Cadastrando o usuario do funcionario");
             await _usuarioService.Cadastra(usuarioDto);
+
+            Log.Information("Usuario do funcionario cadastrado com sucesso");
             return Ok("Usuário cadastrado!");
         }
 
@@ -33,14 +37,20 @@ namespace FazendaSharpCity_API.Controllers
         [HttpPost("CadastroAdmin")]
         public async Task<IActionResult> CadatraAmin(CreateUsuarioDto usuarioDto)
         {
+            Log.Information("Cadastrando o usuario do administrador");
             await _usuarioService.CadastraAdmin(usuarioDto);
+
+            Log.Information("Usuario do administrador cadastrado com sucesso");
             return Ok("Usuário cadastrado!");
         }
 
         [HttpPost("Login")]
         public async Task<IActionResult> LoginAsync(LoginUsuarioDto loginDto)
         {
+            Log.Information("Realizando login");
             var token = await _usuarioService.LoginAsync(loginDto);
+
+            Log.Information("Login realzado com sucesso");
             return Ok(token);
         }
     }

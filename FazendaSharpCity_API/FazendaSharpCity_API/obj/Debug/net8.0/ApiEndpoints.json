@@ -36,11 +36,6 @@
         "Name": "pageQtd",
         "Type": "System.Int32",
         "IsRequired": false
-      },
-      {
-        "Name": "nome",
-        "Type": "System.String",
-        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -139,32 +134,6 @@
       }
     ],
     "ReturnTypes": []
-  },
-  {
-    "ContainingType": "FazendaSharpCity_API.Controllers.ClienteController",
-    "Method": "ReadClienteNome",
-    "RelativePath": "Cliente/PesquisaNome/{nome}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "nome",
-        "Type": "System.String",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": [
-      {
-        "Type": "System.Collections.Generic.IEnumerable\u00601[[FazendaSharpCity_API.Data.DTOs.Cliente.ReadClienteDto, FazendaSharpCity_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
-        "MediaTypes": [
-          "text/plain",
-          "application/json",
-          "text/json"
-        ],
-        "StatusCode": 200
-      }
-    ]
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.EnderecoController",
@@ -271,11 +240,6 @@
       {
         "Name": "pageQtd",
         "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "nome",
-        "Type": "System.String",
         "IsRequired": false
       }
     ],
@@ -392,11 +356,6 @@
       {
         "Name": "pageQtd",
         "Type": "System.Int32",
-        "IsRequired": false
-      },
-      {
-        "Name": "nome",
-        "Type": "System.String",
         "IsRequired": false
       }
     ],

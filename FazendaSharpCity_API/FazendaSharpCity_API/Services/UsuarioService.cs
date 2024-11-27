@@ -4,6 +4,7 @@ using FazendaSharpCity_API.Data.DTOs.Usuario;
 using FazendaSharpCity_API.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace FazendaSharpCity_API.Services
 {   
@@ -26,19 +27,29 @@ namespace FazendaSharpCity_API.Services
 
         public async Task Cadastra(CreateUsuarioDto usuarioDto)
         {
+            Log.Information("Cadastrando usuáio");
             Usuario usuario = _mapper.Map<Usuario>(usuarioDto);
             IdentityResult resultado = await _userManager.CreateAsync(usuario, usuarioDto.Password);
 
-            if (!resultado.Succeeded) throw new ApplicationException("Falha ao cadastrar usuáio!");
+            if (!resultado.Succeeded) 
+            {
+                Log.Error("Falha ao cadastrar usuáio");
+                throw new ApplicationException("Falha ao cadastrar usuáio!"); 
+            }
 
         }
 
         public async Task CadastraAdmin(CreateUsuarioDto usuarioDto)
         {
+            Log.Information("Cadastrando usuáio admin");
             Usuario usuario = _mapper.Map<Usuario>(usuarioDto);
             IdentityResult resultado = await _userManager.CreateAsync(usuario, usuarioDto.Password);
 
-            if (!resultado.Succeeded) throw new ApplicationException("Falha ao cadastrar usuáio!");
+            if (!resultado.Succeeded)
+            {
+                Log.Error("Falha ao cadastrar usuáio admin");
+                throw new ApplicationException("Falha ao cadastrar usuáio!");
+            }
 
             if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
                 await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
@@ -53,6 +64,7 @@ namespace FazendaSharpCity_API.Services
            var resultado = await _signInManager.PasswordSignInAsync(loginDto.Login, loginDto.Password, false, false);
            if (!resultado.Succeeded)
             {
+                Log.Error("Falha ao autenticar o usuáio");
                 throw new ApplicationException("Usuário não autenticado");
             }
 

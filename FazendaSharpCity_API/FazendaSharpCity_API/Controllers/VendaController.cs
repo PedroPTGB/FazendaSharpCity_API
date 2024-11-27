@@ -6,6 +6,7 @@ using FazendaSharpCity_API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace FazendaSharpCity_API.Controllers
 {
@@ -27,20 +28,18 @@ namespace FazendaSharpCity_API.Controllers
         {
             try
             {
+                Log.Information("Cadastrando venda");
                 Venda venda = _mapper.Map<Venda>(vendaDto);
-
-                if (venda == null)
-                {
-                    return BadRequest("Venda não pode ser nulo.");
-                }
 
                 await _context.Vendas.AddAsync(venda);
                 await _context.SaveChangesAsync();
 
+                Log.Information("Dados cadastrados da venda: {@venda}", venda);
                 return CreatedAtAction(nameof(GetVenda), new { id = venda.IdVenda }, venda.IdVenda);
             }
             catch (Exception)
             {
+                Log.Error("Falha em criar a venda: {@vendaDto}", vendaDto);
                 throw;
             }
         }
@@ -49,6 +48,7 @@ namespace FazendaSharpCity_API.Controllers
         [HttpGet]
         public IEnumerable<ReadVendaDto> ListaVendas([FromQuery] int pageNumber = 1, int pageQtd = 10)
         {
+            Log.Information("Listando vendas do banco de dados");
             return _mapper.Map<IEnumerable<ReadVendaDto>>(_context.Vendas.Skip((pageNumber - 1) * pageQtd).Take(pageQtd));
         }
 
@@ -58,19 +58,23 @@ namespace FazendaSharpCity_API.Controllers
         {
             try
             {
+                Log.Information("Buscando venda pelo ID: {@id}", id);
                 var venda = await _context.Vendas.FirstOrDefaultAsync(venda => venda.IdVenda == id);
 
                 if (venda == null)
                 {
+                    Log.Warning("Não encontrada venda com ID: {@id}", id);
                     return NotFound();
                 }
 
                 var vendaDto = _mapper.Map<ReadVendaDto>(venda);
 
+                Log.Information("Venda encontrada: {@vendaDto}", vendaDto);
                 return Ok(vendaDto);
             }
             catch (Exception)
             {
+                Log.Error("Falha em buscar o venda pelo ID: {@id}", id);
                 throw;
             }
         }
@@ -81,20 +85,25 @@ namespace FazendaSharpCity_API.Controllers
         {
             try
             {
+                Log.Information("Atualizando dados da venda com ID: {@id}", id);
                 var venda = await _context.Vendas.FirstOrDefaultAsync(venda => venda.IdVenda == id);
 
                 if (venda == null)
                 {
+                    Log.Warning("Não encontrado venda com ID: {@id}", id);
                     return NotFound();
                 }
 
+                Log.Information("Dados da venda foram atualizados, dados antigos: {@vendaDto}", vendaDto);
                 _mapper.Map(vendaDto, venda);
                 await _context.SaveChangesAsync();
 
+                Log.Information("Dados da venda foram atualizados, dados novos: {@venda}", venda);
                 return NoContent();
             }
             catch (Exception)
             {
+                Log.Error("Falha em atualizar os dados da venda com ID: {@id}", id);
                 throw;
             }
         }
@@ -105,20 +114,25 @@ namespace FazendaSharpCity_API.Controllers
         {
             try
             {
+                Log.Information("Deletando dados da venda com ID: {@id}", id);
                 var venda = await _context.Vendas.FirstOrDefaultAsync(venda => venda.IdVenda == id);
 
                 if (venda == null)
                 {
+                    Log.Warning("Não encontrada venda com ID: {@id}", id);
                     return NotFound();
                 }
 
+                Log.Information("Dados da venda foram apagados, dados antigos: {@venda}", venda);
                 _context.Vendas.Remove(venda);
                 await _context.SaveChangesAsync();
 
+                Log.Information("Deletados com sucesso os dados da venda com ID: {@id}", id);
                 return Ok();
             }
             catch (Exception)
             {
+                Log.Error("Falha em deletar os dados da venda com ID: {@id}", id);
                 throw;
             }
         }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using FazendaSharpCity_API.Data.DTOs.Cliente;
 using FazendaSharpCity_API.Services;
+using Serilog;
 
 namespace FazendaSharpCity_API.Controllers
 {
@@ -31,6 +32,7 @@ namespace FazendaSharpCity_API.Controllers
         {
             try
             {
+                Log.Information("Cadastrando fornecedor");
                 Fornecedor fornecedor = _mapper.Map<Fornecedor>(fornecedorDto);
 
                 bool fornecedorUnico = await _apiService.VerificaUnicoFornecedor(fornecedor);
@@ -39,47 +41,37 @@ namespace FazendaSharpCity_API.Controllers
                     await _context.Fornecedores.AddAsync(fornecedor);
                     await _context.SaveChangesAsync();
 
+                    Log.Information("Dados cadastrados do fornecedor: {@fornecedor}", fornecedor);
                     return CreatedAtAction(nameof(GetFornecedor), new { id = fornecedor.Id }, fornecedor);
                 }
 
+                Log.Warning("CNPJ informado para o fornecedor já existe no banco de dados");
                 return BadRequest("CNPJ cadastrado para outro fornecedor");
 
 
             }
             catch (Exception)
             {
+                Log.Error("Falha em criar o fornecedor: {@fornecedorDto}", fornecedorDto);
                 throw;
             }
         }
 
         [Authorize]
         [HttpGet]
-        public IEnumerable<ReadFornecedorDto> ReadFornecedor([FromQuery] int pageNumber = 1, int pageQtd = 10, string? nome = null)
+        public IEnumerable<ReadFornecedorDto> ReadFornecedor([FromQuery] int pageNumber = 1, int pageQtd = 10)
         {
             try
             {
-
+                Log.Information("Listando fornecedores do banco de dados, pagina {@pageNumber} com {@pageQtd} elementos por pagina", pageNumber, pageQtd);
                 List<ReadFornecedorDto> fornecedores = new List<ReadFornecedorDto>();
-                for (int i = pageNumber - 1; i < pageQtd; i++)
+                for (int i = (pageNumber - 1) * pageQtd; i < ((pageNumber - 1) * pageQtd) + pageQtd; i++)
                 {
-
-                    if (nome == null)
+                    var fornecedor = _context.Fornecedores.FirstOrDefault(fornecedor => fornecedor.Id == i);
+                    if (fornecedor != null)
                     {
-                        var fornecedor = _context.Fornecedores.FirstOrDefault(fornecedor => fornecedor.Id == i);
-                        if (fornecedor != null)
-                        {
-                            var fornecedorDto = _mapper.Map<ReadFornecedorDto>(fornecedor);
-                            fornecedores.Add(fornecedorDto);
-                        }
-                    }
-                    else
-                    {
-                        var fornecedor = _context.Fornecedores.Where(fornecedor => fornecedor.RazaoSocial.Contains(nome));
-                        if (fornecedor != null)
-                        {
-                            var fornecedorDto = _mapper.Map<ReadFornecedorDto>(fornecedor);
-                            fornecedores.Add(fornecedorDto);
-                        }
+                        var fornecedorDto = _mapper.Map<ReadFornecedorDto>(fornecedor);
+                        fornecedores.Add(fornecedorDto);
                     }
                 }
 
@@ -87,6 +79,7 @@ namespace FazendaSharpCity_API.Controllers
             }
             catch (Exception)
             {
+                Log.Error("Falha em listar os fornecedores");
                 throw;
             }
         }
@@ -98,21 +91,25 @@ namespace FazendaSharpCity_API.Controllers
         {
             try
             {
+                Log.Information("Buscando fornecedor pelo CNPJ: {@cnpj}", cnpj);
                 Fornecedor fornecedor = null;
 
                 fornecedor = await _context.Fornecedores.FirstOrDefaultAsync(fornecedor => fornecedor.Cnpj == cnpj);
                 
                 if (fornecedor == null)
                 {
+                    Log.Warning("Não encontrado fornecedor com o CNPJ: {@cnpj}", cnpj);
                     return NotFound();
                 }
 
                 var fornecedorDto = _mapper.Map<ReadFornecedorDto>(fornecedor);
 
+                Log.Information("Fornecedor encontrado: {@fornecedorDto}", fornecedorDto);
                 return Ok(fornecedorDto);
             }
             catch (Exception)
             {
+                Log.Error("Falha em buscar o fornecedor com o CNPJ: {@cnpj}", cnpj);
                 throw;
             }
         }
@@ -124,19 +121,23 @@ namespace FazendaSharpCity_API.Controllers
         {
             try
             {
+                Log.Information("Buscando fornecedor pelo ID: {@id}", id);
                 var fornecedor = await _context.Fornecedores.FirstOrDefaultAsync(fornecedor => fornecedor.Id == id);
 
                 if (fornecedor == null)
                 {
+                    Log.Warning("Não encontrado fornecedor com ID: {@id}", id);
                     return NotFound();
                 }
 
                 var fornecedorDto = _mapper.Map<ReadFornecedorDto>(fornecedor);
 
+                Log.Information("Fornecedor encontrado: {@fornecedorDto}", fornecedorDto);
                 return Ok(fornecedorDto);
             }
             catch (Exception) 
             {
+                Log.Error("Falha em buscar o fornecedor pelo ID: {@id}", id);
                 throw;
             }
         }
@@ -147,20 +148,26 @@ namespace FazendaSharpCity_API.Controllers
         {
             try
             {
+                Log.Information("Atualizando dados do fornecedor com ID: {@id}", id);
                 var fornecedor = await _context.Fornecedores.FirstOrDefaultAsync(fornecedor => fornecedor.Id == id);
 
                 if (fornecedor == null)
                 {
+                    Log.Warning("Não encontrado fornecedor com ID: {@id}", id);
                     return NotFound();
                 }
 
+
+                Log.Information("Dados do fornecedor foram atualizados, dados antigos: {@fornecedorDto}", fornecedorDto);
                 _mapper.Map(fornecedorDto, fornecedor);
                await _context.SaveChangesAsync();
 
+                Log.Information("Dados do fornecedor foram atualizados, dados novos: {@fornecedor}", fornecedor);
                 return NoContent();
             }
             catch (Exception)
             {
+                Log.Error("Falha em atualizar os dados do fornecedor com ID: {@id}", id);
                 throw;
             }
         }
@@ -171,20 +178,25 @@ namespace FazendaSharpCity_API.Controllers
         {
             try
             {
+                Log.Information("Deletando dados do fornecedor com ID: {@id}", id);
                 var fornecedor = await _context.Fornecedores.FirstOrDefaultAsync(fornecedor => fornecedor.Id == id);
 
                 if (fornecedor == null)
                 {
+                    Log.Warning("Não encontrado fornecedor com ID: {@id}", id);
                     return NotFound();
                 }
 
+                Log.Information("Dados do fornecedor foram apagados, dados antigos: {@fornecedor}", fornecedor);
                 _context.Fornecedores.Remove(fornecedor);
                await _context.SaveChangesAsync();
 
+                Log.Information("Deletados com sucesso os dados do fornecedor com ID: {@id}", id);
                 return Ok();
             }
             catch (Exception)
             {
+                Log.Error("Falha em deletar os dados do fornecedor com ID: {@id}", id);
                 throw;
             }
         }

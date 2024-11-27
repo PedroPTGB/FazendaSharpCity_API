@@ -7,6 +7,7 @@ using FazendaSharpCity_API.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace FazendaSharpCity_API.Controllers
 {
@@ -29,15 +30,18 @@ namespace FazendaSharpCity_API.Controllers
         {
             try
             {
+                Log.Information("Cadastrando produto");
                 Produto produto = _mapper.Map<Produto>(createProdutoDto);
                 await _context.Produtos.AddAsync(produto);
                 await _context.SaveChangesAsync();
 
+                Log.Information("Dados cadastrados do produto: {@produto}", produto);
                 return CreatedAtAction(nameof(GetProduto), new { id = produto.IdProduto }, produto.IdProduto);
 
             }
             catch (Exception e)
             {
+                Log.Error("Falha em criar o produto: {@createProdutoDto}", createProdutoDto);
                 throw;
             }
         }
@@ -46,6 +50,7 @@ namespace FazendaSharpCity_API.Controllers
         [HttpGet]
         public IEnumerable<ReadProdutoDto> ListaProdutos([FromQuery] int pageNumber = 1, int pageQtd = 10)
         {
+            Log.Information("Listando produtos do banco de dados");
             return _mapper.Map<IEnumerable<ReadProdutoDto>>(_context.Produtos.Skip((pageNumber - 1) * pageQtd).Take(pageQtd));
         }
 
@@ -55,19 +60,24 @@ namespace FazendaSharpCity_API.Controllers
         {
             try
             {
+                Log.Information("Buscando produto pelo ID: {@id}", id);
                 var produto = await _context.Produtos.FindAsync(id);
 
                 if (produto == null)
                 {
+                    Log.Warning("Não encontrado produto com ID: {@id}", id);
                     return NotFound();
                 }
 
                 var produtoDto = _mapper.Map<ReadProdutoDto>(produto);
+
+                Log.Information("Produto encontrado: {@produtoDto}", produtoDto);
                 return Ok(produtoDto);
 
             }
             catch (Exception)
             {
+                Log.Error("Falha em buscar o produto pelo ID: {@id}", id);
                 throw;
             }
         }
@@ -78,20 +88,25 @@ namespace FazendaSharpCity_API.Controllers
         {
             try
             {
+                Log.Information("Atualizando dados do produto com ID: {@id}", id);
                 var produto = await _context.Produtos.FirstOrDefaultAsync(produto => produto.IdProduto == id);
 
                 if (produto == null)
                 {
+                    Log.Warning("Não encontrado produto com ID: {@id}", id);
                     return NotFound();
                 }
 
+                Log.Information("Dados do produto foram atualizados, dados antigos: {@produtoDto}", produtoDto);
                 _mapper.Map(produtoDto, produto);
                await _context.SaveChangesAsync();
 
+                Log.Information("Dados do produto foram atualizados, dados novos: {@produto}", produto);
                 return Ok();
             }
             catch (Exception)
             {
+                Log.Error("Falha em atualizar os dados do produto com ID: {@id}", id);
                 throw;
             }
         }
@@ -102,20 +117,25 @@ namespace FazendaSharpCity_API.Controllers
         {
             try
             {
+                Log.Information("Deletando dados do produto com ID: {@id}", id);
                 var produto = await _context.Produtos.FirstOrDefaultAsync(produto => produto.IdProduto == id);
 
                 if (produto == null)
                 {
+                    Log.Warning("Não encontrado produto com ID: {@id}", id);
                     return NotFound();
                 }
 
+                Log.Information("Dados do produto foram apagados, dados antigos: {@produto}", produto);
                 _context.Produtos.Remove(produto);
                await _context.SaveChangesAsync();
 
+                Log.Information("Deletados com sucesso os dados do produto com ID: {@id}", id);
                 return Ok();
             }
             catch (Exception)
             {
+                Log.Error("Falha em deletar os dados do produto com ID: {@id}", id);
                 throw;
             }
         }

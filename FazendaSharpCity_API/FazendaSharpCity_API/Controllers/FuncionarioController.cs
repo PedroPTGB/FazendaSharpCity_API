@@ -8,6 +8,7 @@ using FazendaSharpCity_API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace FazendaSharpCity_API.Controllers
 {
@@ -33,6 +34,7 @@ namespace FazendaSharpCity_API.Controllers
         {
             try
             {
+                Log.Information("Cadastrando funcionario");
                 Funcionario funcionario = _mapper.Map<Funcionario>(funcionarioDto);
 
                 bool funcionarioUnico = await _apiService.VerificaUnicoFuncionario(funcionario);
@@ -41,15 +43,18 @@ namespace FazendaSharpCity_API.Controllers
                     await _context.Funcionarios.AddAsync(funcionario);
                     await _context.SaveChangesAsync();
 
+                    Log.Information("Dados cadastrados do funcionario: {@funcionario}", funcionario);
                     return CreatedAtAction(nameof(GetFuncionario), new { id = funcionario.Id }, funcionario);
                 }
 
+                Log.Warning("CPF informado para o funcionario já existe no banco de dados");
                 return BadRequest("CPF cadastrado para outro funcionario");
 
 
             }
             catch (Exception)
             {
+                Log.Error("Falha em criar o funcionario: {@funcionarioDto}", funcionarioDto);
                 throw;
             }
         }
@@ -60,19 +65,24 @@ namespace FazendaSharpCity_API.Controllers
         {
             try
             {
+                Log.Information("Buscando funcionario pelo ID: {@id}", id);
                 var funcionario = await _context.Funcionarios.FirstOrDefaultAsync(funcionario => funcionario.Id == id);
 
                 if (funcionario == null)
                 {
+                    Log.Warning("Não encontrado funcionario com ID: {@id}", id);
                     return NotFound();
                 }
 
                 var funcionarioDto = _mapper.Map<ReadFuncionarioDto>(funcionario);
+
+                Log.Information("Funcionario encontrado: {@funcionarioDto}", funcionarioDto);
                 return Ok(funcionarioDto);
 
             }
             catch (Exception)
             {
+                Log.Error("Falha em buscar o funcionario pelo ID: {@id}", id);
                 throw;
             }
         }
@@ -80,32 +90,20 @@ namespace FazendaSharpCity_API.Controllers
 
         [Authorize]
         [HttpGet]
-        public IEnumerable<ReadFuncionarioDto> ReadFuncionario([FromQuery] int pageNumber = 1, int pageQtd = 10, string? nome = null)
+        public IEnumerable<ReadFuncionarioDto> ReadFuncionario([FromQuery] int pageNumber = 1, int pageQtd = 10)
         {
             try
             {
+                Log.Information("Listando funcionarios do banco de dados, pagina {@pageNumber} com {@pageQtd} elementos por pagina", pageNumber, pageQtd);
 
                 List<ReadFuncionarioDto> funcionarios = new List<ReadFuncionarioDto>();
-                for (int i = pageNumber - 1; i < pageQtd; i++)
+                for (int i = (pageNumber - 1) * pageQtd; i < ((pageNumber - 1) * pageQtd) + pageQtd; i++)
                 {
-
-                    if (nome == null)
+                    var funcionario = _context.Funcionarios.FirstOrDefault(funcionario => funcionario.Id == i);
+                    if (funcionario != null)
                     {
-                        var funcionario = _context.Funcionarios.FirstOrDefault(funcionario => funcionario.Id == i);
-                        if (funcionario != null)
-                        {
-                            var funcionarioDto = _mapper.Map<ReadFuncionarioDto>(funcionario);
-                            funcionarios.Add(funcionarioDto);
-                        }
-                    }
-                    else
-                    {
-                        var funcionario = _context.Funcionarios.Where(funcionario => funcionario.Nome.Contains(nome));
-                        if (funcionario != null)
-                        {
-                            var funcionarioDto = _mapper.Map<ReadFuncionarioDto>(funcionario);
-                            funcionarios.Add(funcionarioDto);
-                        }
+                        var funcionarioDto = _mapper.Map<ReadFuncionarioDto>(funcionario);
+                        funcionarios.Add(funcionarioDto);
                     }
                 }
 
@@ -113,6 +111,7 @@ namespace FazendaSharpCity_API.Controllers
             }
             catch (Exception)
             {
+                Log.Error("Falha em listar os funcionarios");
                 throw;
             }
         }
@@ -124,21 +123,25 @@ namespace FazendaSharpCity_API.Controllers
         {
             try
             {
+                Log.Information("Buscando funcionario pelo CPF: {@cpf}", cpf);
                 Funcionario funcionario = null;
 
                 funcionario = await _context.Funcionarios.FirstOrDefaultAsync(funcionario => funcionario.CPF == cpf);
 
                 if (funcionario == null)
                 {
+                    Log.Warning("Não encontrado funcionario com o CPF: {@cpf}", cpf);
                     return NotFound();
                 }
 
                 var funcionarioDto = _mapper.Map<ReadFuncionarioDto>(funcionario);
 
+                Log.Information("Funcionario encontrado: {@funcionarioDto}", funcionarioDto);
                 return Ok(funcionarioDto);
             }
             catch (Exception)
             {
+                Log.Error("Falha em buscar o funcionario com o codigo fiscal: {@cpf}", cpf);
                 throw;
             }
         }
@@ -151,20 +154,25 @@ namespace FazendaSharpCity_API.Controllers
         {
             try
             {
+                Log.Information("Atualizando dados do funcionario com ID: {@id}", id);
                 var funcionario = await _context.Funcionarios.FirstOrDefaultAsync(fornecedor => fornecedor.Id == id);
 
                 if (funcionario == null)
                 {
+                    Log.Warning("Não encontrado funcionario com ID: {@id}", id);
                     return NotFound();
                 }
 
+                Log.Information("Dados do funcionario foram atualizados, dados antigos: {@funcionarioDto}", funcionarioDto);
                 _mapper.Map(funcionarioDto, funcionario);
                 await _context.SaveChangesAsync();
 
+                Log.Information("Dados do funcionario foram atualizados, dados novos: {@funcionario}", funcionario);
                 return NoContent();
             }
             catch (Exception)
             {
+                Log.Error("Falha em atualizar os dados do funcionario com ID: {@id}", id);
                 throw;
             }
         }
@@ -175,20 +183,25 @@ namespace FazendaSharpCity_API.Controllers
         {
             try
             {
+                Log.Information("Atualizando dados do funcionario com CPF: {@cpf}", cpf);
                 var funcionario = await _context.Funcionarios.FirstOrDefaultAsync(fornecedor => fornecedor.CPF == cpf);
 
                 if (funcionario == null)
                 {
+                    Log.Warning("Não encontrado funcionario com CPF: {@id}", cpf);
                     return NotFound();
                 }
 
+                Log.Information("Dados do funcionario foram atualizados, dados antigos: {@funcionarioDto}", funcionarioDto);
                 _mapper.Map(funcionarioDto, funcionario);
                 await _context.SaveChangesAsync();
 
+                Log.Information("Dados do funcionario foram atualizados, dados novos: {@funcionario}", funcionario);
                 return NoContent();
             }
             catch (Exception)
             {
+                Log.Error("Falha em atualizar os dados do funcionario com CPF: {@cpf}", cpf);
                 throw;
             }
         }
@@ -198,20 +211,25 @@ namespace FazendaSharpCity_API.Controllers
         {
             try
             {
+                Log.Information("Deletando dados do funcionario com ID: {@id}", id);
                 var funcionario = await _context.Funcionarios.FirstOrDefaultAsync(funcionario => funcionario.Id == id);
 
                 if (funcionario == null)
                 {
+                    Log.Warning("Não encontrado funcionario com ID: {@id}", id);
                     return NotFound();
                 }
 
+                Log.Information("Dados do funcionario foram apagados, dados antigos: {@funcionario}", funcionario);
                 _context.Funcionarios.Remove(funcionario);
                 await _context.SaveChangesAsync();
 
+                Log.Information("Deletados com sucesso os dados do funcionario com ID: {@id}", id);
                 return Ok();
             }
             catch (Exception)
             {
+                Log.Error("Falha em deletar os dados do funcionario com ID: {@id}", id);
                 throw;
             }
         }
