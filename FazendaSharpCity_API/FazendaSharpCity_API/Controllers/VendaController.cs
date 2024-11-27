@@ -100,7 +100,7 @@ namespace FazendaSharpCity_API.Controllers
         }
 
         [Authorize(Roles = UserRoles.Admin)]
-        [HttpDelete("{id}")]
+        [HttpDelete("Excluir/{id}")]
         public async Task<IActionResult> DeleteVenda(int id)
         {
             try
