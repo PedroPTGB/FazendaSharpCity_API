@@ -44,6 +44,7 @@ builder.Services.AddAuthentication(options =>
 
 builder.Services.AddScoped<UsuarioService>();
 builder.Services.AddScoped<TokenService>();
+builder.Services.AddScoped<ApiService>();
 
 builder.Services.Configure<IdentityOptions>(options =>
 {

@@ -73,22 +73,6 @@
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.ClienteController",
-    "Method": "ReadClienteId",
-    "RelativePath": "Cliente/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "FazendaSharpCity_API.Controllers.ClienteController",
     "Method": "UpdateCliente",
     "RelativePath": "Cliente/{id}",
     "HttpMethod": "PUT",
@@ -113,6 +97,38 @@
     "Method": "DeleteCliente",
     "RelativePath": "Cliente/{id}",
     "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FazendaSharpCity_API.Controllers.ClienteController",
+    "Method": "ReadClienteCPFeCNPJ",
+    "RelativePath": "Cliente/PesquisaCPF-CNPJ/{cpf}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cpf",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FazendaSharpCity_API.Controllers.ClienteController",
+    "Method": "ReadClienteId",
+    "RelativePath": "Cliente/PesquisaId/{id}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -231,6 +247,42 @@
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.FornecedorController",
+    "Method": "ReadFornecedor",
+    "RelativePath": "Fornecedor",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageQtd",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "nome",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FazendaSharpCity_API.Models.ReadFornecedorDto, FazendaSharpCity_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "FazendaSharpCity_API.Controllers.FornecedorController",
     "Method": "GetFornecedor",
     "RelativePath": "Fornecedor/{id}",
     "HttpMethod": "GET",
@@ -283,6 +335,22 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "FazendaSharpCity_API.Controllers.FornecedorController",
+    "Method": "ReadFornecedorCNPJ",
+    "RelativePath": "Fornecedor/PesquisaCNPJ/{cnpj}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cnpj",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "FazendaSharpCity_API.Controllers.FuncionarioController",
     "Method": "CreateFuncionario",
     "RelativePath": "Funcionario",
@@ -297,6 +365,42 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FazendaSharpCity_API.Controllers.FuncionarioController",
+    "Method": "ReadFuncionario",
+    "RelativePath": "Funcionario",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "pageNumber",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "pageQtd",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "nome",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Collections.Generic.IEnumerable\u00601[[FazendaSharpCity_API.Data.DTOs.Funcionario.ReadFuncionarioDto, FazendaSharpCity_API, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.FuncionarioController",
@@ -346,6 +450,22 @@
       {
         "Name": "id",
         "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FazendaSharpCity_API.Controllers.FuncionarioController",
+    "Method": "ReadFuncionarioCPF",
+    "RelativePath": "Funcionario/PesquisaCPF/{cpf}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cpf",
+        "Type": "System.String",
         "IsRequired": true
       }
     ],

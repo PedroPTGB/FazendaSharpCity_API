@@ -4,6 +4,7 @@ using FazendaSharpCity_API.Data.Contexts;
 using FazendaSharpCity_API.Data.DTOs.Cliente;
 using FazendaSharpCity_API.Data.DTOs.Funcionario;
 using FazendaSharpCity_API.Models;
+using FazendaSharpCity_API.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -16,11 +17,13 @@ namespace FazendaSharpCity_API.Controllers
     {
         private ApiContext _context;
         private IMapper _mapper;
+        private ApiService _apiService;
 
-        public FuncionarioController(ApiContext context, IMapper mapper)
+        public FuncionarioController(ApiContext context, IMapper mapper, ApiService apiService)
         {
             _context = context;
             _mapper = mapper;
+            _apiService = apiService;
         }
 
 
@@ -32,15 +35,18 @@ namespace FazendaSharpCity_API.Controllers
             {
                 Funcionario funcionario = _mapper.Map<Funcionario>(funcionarioDto);
 
-                if (funcionario == null)
+                bool funcionarioUnico = await _apiService.VerificaUnicoFuncionario(funcionario);
+                if (funcionarioUnico)
                 {
-                    return BadRequest("Funcionadrio não pode ser nulo");
+                    await _context.Funcionarios.AddAsync(funcionario);
+                    await _context.SaveChangesAsync();
+
+                    return CreatedAtAction(nameof(GetFuncionario), new { id = funcionario.Id }, funcionario);
                 }
 
-                await _context.Funcionarios.AddAsync(funcionario);
-                await _context.SaveChangesAsync();
+                return BadRequest("CPF cadastrado para outro funcionario");
 
-                return CreatedAtAction(nameof(GetFuncionario), new { id = funcionario.Id }, funcionario.Id);
+
             }
             catch (Exception)
             {
@@ -70,7 +76,75 @@ namespace FazendaSharpCity_API.Controllers
                 throw;
             }
         }
-        
+
+
+        [Authorize]
+        [HttpGet]
+        public IEnumerable<ReadFuncionarioDto> ReadFuncionario([FromQuery] int pageNumber = 1, int pageQtd = 10, string? nome = null)
+        {
+            try
+            {
+
+                List<ReadFuncionarioDto> funcionarios = new List<ReadFuncionarioDto>();
+                for (int i = pageNumber - 1; i < pageQtd; i++)
+                {
+
+                    if (nome == null)
+                    {
+                        var funcionario = _context.Funcionarios.FirstOrDefault(funcionario => funcionario.Id == i);
+                        if (funcionario != null)
+                        {
+                            var funcionarioDto = _mapper.Map<ReadFuncionarioDto>(funcionario);
+                            funcionarios.Add(funcionarioDto);
+                        }
+                    }
+                    else
+                    {
+                        var funcionario = _context.Funcionarios.Where(funcionario => funcionario.Nome.Contains(nome));
+                        if (funcionario != null)
+                        {
+                            var funcionarioDto = _mapper.Map<ReadFuncionarioDto>(funcionario);
+                            funcionarios.Add(funcionarioDto);
+                        }
+                    }
+                }
+
+                return funcionarios;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        [Authorize]
+        [HttpGet("PesquisaCPF/{cpf}")]
+        public async Task<IActionResult> ReadFuncionarioCPF(string cpf)
+        {
+            try
+            {
+                Funcionario funcionario = null;
+
+                funcionario = await _context.Funcionarios.FirstOrDefaultAsync(funcionario => funcionario.CPF == cpf);
+
+                if (funcionario == null)
+                {
+                    return NotFound();
+                }
+
+                var funcionarioDto = _mapper.Map<ReadFuncionarioDto>(funcionario);
+
+                return Ok(funcionarioDto);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+
         [Authorize(Roles = UserRoles.Admin)]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateFuncionario(int id, [FromBody] UpdateFuncionarioDto funcionarioDto)
