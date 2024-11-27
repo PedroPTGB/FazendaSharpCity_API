@@ -166,7 +166,7 @@ namespace FazendaSharpCity_API.Controllers
         }
 
         [Authorize]
-        [HttpDelete("{id}")]
+        [HttpDelete("Excluir/{id}")]
         public async Task<IActionResult> DeleteFornecedor(int id)
         {
             try

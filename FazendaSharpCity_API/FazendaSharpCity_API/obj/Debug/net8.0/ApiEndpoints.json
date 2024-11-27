@@ -21,22 +21,6 @@
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.ClienteController",
-    "Method": "CreateClienteDto",
-    "RelativePath": "Cliente",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "clienteDto",
-        "Type": "FazendaSharpCity_API.Data.DTOs.Cliente.CreateClienteDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "FazendaSharpCity_API.Controllers.ClienteController",
     "Method": "ReadCliente",
     "RelativePath": "Cliente",
     "HttpMethod": "GET",
@@ -74,7 +58,7 @@
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.ClienteController",
     "Method": "UpdateCliente",
-    "RelativePath": "Cliente/{id}",
+    "RelativePath": "Cliente/Atualizar/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -94,8 +78,24 @@
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.ClienteController",
+    "Method": "CreateClienteDto",
+    "RelativePath": "Cliente/Cadastrar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "clienteDto",
+        "Type": "FazendaSharpCity_API.Data.DTOs.Cliente.CreateClienteDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FazendaSharpCity_API.Controllers.ClienteController",
     "Method": "DeleteCliente",
-    "RelativePath": "Cliente/{id}",
+    "RelativePath": "Cliente/Excluir/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -142,22 +142,6 @@
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.EnderecoController",
-    "Method": "CreateEndereco",
-    "RelativePath": "Endereco",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "enderecoDto",
-        "Type": "FazendaSharpCity_API.Data.DTOs.Endereco.CreateEnderecoDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "FazendaSharpCity_API.Controllers.EnderecoController",
     "Method": "RecuperaEnderecos",
     "RelativePath": "Endereco",
     "HttpMethod": "GET",
@@ -178,24 +162,8 @@
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.EnderecoController",
-    "Method": "ReadEndereco",
-    "RelativePath": "Endereco/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "FazendaSharpCity_API.Controllers.EnderecoController",
     "Method": "UpdateEndereco",
-    "RelativePath": "Endereco/{id}",
+    "RelativePath": "Endereco/Atualizar/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -215,8 +183,24 @@
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.EnderecoController",
+    "Method": "CreateEndereco",
+    "RelativePath": "Endereco/Cadastrar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "enderecoDto",
+        "Type": "FazendaSharpCity_API.Data.DTOs.Endereco.CreateEnderecoDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FazendaSharpCity_API.Controllers.EnderecoController",
     "Method": "DeletaEndereco",
-    "RelativePath": "Endereco/{id}",
+    "RelativePath": "Endereco/Excluir/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -230,16 +214,16 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "FazendaSharpCity_API.Controllers.FornecedorController",
-    "Method": "CreateFornecedor",
-    "RelativePath": "Fornecedor",
-    "HttpMethod": "POST",
+    "ContainingType": "FazendaSharpCity_API.Controllers.EnderecoController",
+    "Method": "ReadEndereco",
+    "RelativePath": "Endereco/PesquisaId/{id}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "fornecedorDto",
-        "Type": "FazendaSharpCity_API.Data.DTOs.Fornecedor.CreateFornecedorDto",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -283,24 +267,8 @@
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.FornecedorController",
-    "Method": "GetFornecedor",
-    "RelativePath": "Fornecedor/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "FazendaSharpCity_API.Controllers.FornecedorController",
     "Method": "UpdateFornecedor",
-    "RelativePath": "Fornecedor/{id}",
+    "RelativePath": "Fornecedor/Atualizar/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -320,8 +288,24 @@
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.FornecedorController",
+    "Method": "CreateFornecedor",
+    "RelativePath": "Fornecedor/Cadastrar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "fornecedorDto",
+        "Type": "FazendaSharpCity_API.Data.DTOs.Fornecedor.CreateFornecedorDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FazendaSharpCity_API.Controllers.FornecedorController",
     "Method": "DeleteFornecedor",
-    "RelativePath": "Fornecedor/{id}",
+    "RelativePath": "Fornecedor/Excluir/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -351,16 +335,16 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "FazendaSharpCity_API.Controllers.FuncionarioController",
-    "Method": "CreateFuncionario",
-    "RelativePath": "Funcionario",
-    "HttpMethod": "POST",
+    "ContainingType": "FazendaSharpCity_API.Controllers.FornecedorController",
+    "Method": "GetFornecedor",
+    "RelativePath": "Fornecedor/PesquisaId/{id}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "funcionarioDto",
-        "Type": "FazendaSharpCity_API.Data.DTOs.Funcionario.CreateFuncionarioDto",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -404,24 +388,8 @@
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.FuncionarioController",
-    "Method": "GetFuncionario",
-    "RelativePath": "Funcionario/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "FazendaSharpCity_API.Controllers.FuncionarioController",
     "Method": "UpdateFuncionario",
-    "RelativePath": "Funcionario/{id}",
+    "RelativePath": "Funcionario/Atualizar/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -441,8 +409,45 @@
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.FuncionarioController",
+    "Method": "UpdateFuncionarioCPF",
+    "RelativePath": "Funcionario/Atualizar/CPF/{cpf}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cpf",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "funcionarioDto",
+        "Type": "FazendaSharpCity_API.Data.DTOs.Funcionario.UpdateFuncionarioDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FazendaSharpCity_API.Controllers.FuncionarioController",
+    "Method": "CreateFuncionario",
+    "RelativePath": "Funcionario/Cadastrar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "funcionarioDto",
+        "Type": "FazendaSharpCity_API.Data.DTOs.Funcionario.CreateFuncionarioDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FazendaSharpCity_API.Controllers.FuncionarioController",
     "Method": "DeletarFuncionario",
-    "RelativePath": "Funcionario/{id}",
+    "RelativePath": "Funcionario/Excluir/{id}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -472,16 +477,16 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "FazendaSharpCity_API.Controllers.ProdutoController",
-    "Method": "CreateProduto",
-    "RelativePath": "Produto",
-    "HttpMethod": "POST",
+    "ContainingType": "FazendaSharpCity_API.Controllers.FuncionarioController",
+    "Method": "GetFuncionario",
+    "RelativePath": "Funcionario/PesquisaId/{id}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "createProdutoDto",
-        "Type": "FazendaSharpCity_API.Data.DTOs.Produto.CreateProdutoDto",
+        "Name": "id",
+        "Type": "System.Int32",
         "IsRequired": true
       }
     ],
@@ -520,24 +525,8 @@
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.ProdutoController",
-    "Method": "GetProduto",
-    "RelativePath": "Produto/{id}",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "id",
-        "Type": "System.Int32",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "FazendaSharpCity_API.Controllers.ProdutoController",
     "Method": "UpdateProduto",
-    "RelativePath": "Produto/{id}",
+    "RelativePath": "Produto/Atualizar/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -557,9 +546,41 @@
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.ProdutoController",
+    "Method": "CreateProduto",
+    "RelativePath": "Produto/Cadastrar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "createProdutoDto",
+        "Type": "FazendaSharpCity_API.Data.DTOs.Produto.CreateProdutoDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FazendaSharpCity_API.Controllers.ProdutoController",
     "Method": "DeleteProduto",
-    "RelativePath": "Produto/{id}",
+    "RelativePath": "Produto/Excluir/{id}",
     "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FazendaSharpCity_API.Controllers.ProdutoController",
+    "Method": "GetProduto",
+    "RelativePath": "Produto/PesquisaId/{id}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -621,22 +642,6 @@
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.VendaController",
-    "Method": "CreateVenda",
-    "RelativePath": "Venda",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "vendaDto",
-        "Type": "FazendaSharpCity_API.Data.DTOs.Venda.CreateVendaDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "FazendaSharpCity_API.Controllers.VendaController",
     "Method": "ListaVendas",
     "RelativePath": "Venda",
     "HttpMethod": "GET",
@@ -669,7 +674,7 @@
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.VendaController",
     "Method": "UpdateVendaDto",
-    "RelativePath": "Venda",
+    "RelativePath": "Venda/Atualizar/{id}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -677,7 +682,7 @@
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": false
+        "IsRequired": true
       },
       {
         "Name": "vendaDto",
@@ -689,9 +694,25 @@
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.VendaController",
-    "Method": "GetVenda",
-    "RelativePath": "Venda/{id}",
-    "HttpMethod": "GET",
+    "Method": "CreateVenda",
+    "RelativePath": "Venda/Cadastrar",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vendaDto",
+        "Type": "FazendaSharpCity_API.Data.DTOs.Venda.CreateVendaDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "FazendaSharpCity_API.Controllers.VendaController",
+    "Method": "DeleteVenda",
+    "RelativePath": "Venda/Excluir/{id}",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
@@ -705,9 +726,9 @@
   },
   {
     "ContainingType": "FazendaSharpCity_API.Controllers.VendaController",
-    "Method": "DeleteVenda",
-    "RelativePath": "Venda/{id}",
-    "HttpMethod": "DELETE",
+    "Method": "GetVenda",
+    "RelativePath": "Venda/PesquisaId/{id}",
+    "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [

@@ -98,7 +98,7 @@ namespace FazendaSharpCity_API.Controllers
         }
 
         [Authorize]
-        [HttpDelete("{id}")]
+        [HttpDelete("Excluir/{id}")]
         public async Task<IActionResult> DeletaEndereco(int id)
         {
             try

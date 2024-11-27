@@ -161,16 +161,39 @@ namespace FazendaSharpCity_API.Controllers
                 _mapper.Map(funcionarioDto, funcionario);
                 await _context.SaveChangesAsync();
 
-                return Ok(funcionario);
+                return NoContent();
             }
             catch (Exception)
             {
                 throw;
             }
         }
-        
+
         [Authorize(Roles = UserRoles.Admin)]
-        [HttpDelete("{id}")]
+        [HttpPut("Atualizar/CPF/{cpf}")]
+        public async Task<IActionResult> UpdateFuncionarioCPF(string cpf, [FromBody] UpdateFuncionarioDto funcionarioDto)
+        {
+            try
+            {
+                var funcionario = await _context.Funcionarios.FirstOrDefaultAsync(fornecedor => fornecedor.CPF == cpf);
+
+                if (funcionario == null)
+                {
+                    return NotFound();
+                }
+
+                _mapper.Map(funcionarioDto, funcionario);
+                await _context.SaveChangesAsync();
+
+                return NoContent();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        [Authorize(Roles = UserRoles.Admin)]
+        [HttpDelete("Excluir/{id}")]
         public async Task<IActionResult> DeletarFuncionario(int id)
         {
             try
