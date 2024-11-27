@@ -96,6 +96,37 @@ namespace FazendaSharpCity_API.Controllers
         }
 
         [Authorize]
+        [HttpGet("PesquisaNome/{nome}")]
+        public IEnumerable<ReadClienteDto> ReadClienteNome(string nome)
+        {
+            try
+            {
+                //List<Cliente> clientes = _context.Clientes.Where(cliente => EF.Functions.Like(cliente.Nome, $"%{nome}%")).ToList();
+
+                //if (clientes == null)
+                //{
+                //    return NotFound();
+                //}
+
+                //ReadClienteDto[] clientesDto = {};
+
+
+                //for (int i = 0;  i < clientes.ToArray().Length; i++)
+                //{
+                //    clientesDto[i] = _mapper.Map<ReadClienteDto>(clientes.ToArray()[i]);
+                //}
+
+                //return Ok(clientesDto.ToList());
+
+                return _mapper.Map<List<ReadClienteDto>>(_context.Clientes.Where(cliente => cliente.Nome.Contains(nome)));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [Authorize]
         [HttpGet("PesquisaId/{id}")]
         public async Task<IActionResult> ReadClienteId(int id) 
         {
