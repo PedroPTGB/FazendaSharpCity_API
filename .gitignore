@@ -519,5 +519,6 @@ FodyWeavers.xsd
 
 # appsettings
 
-C:\Users\pedro\OneDrive\Documentos\GitHub\FazendaSharpCity_API\FazendaSharpCity_API\FazendaSharpCity_API\appsettings.json
+./FazendaSharpCity_API/FazendaSharpCity_API/appsettings.json
+
 /FazendaSharpCity_API/FazendaSharpCity_API/obj/Debug/net8.0/FazendaSharpCity_API.MvcApplicationPartsAssemblyInfo.cs
