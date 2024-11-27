@@ -13,7 +13,7 @@ namespace FazendaSharpCity_API.Data.DTOs.Produto
         public int Quantidade { get; set; }
 
         [Required(ErrorMessage = "A data de validade é obrigatória.")]
-        [DataType(DataType.DateTime)]
+        [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "dd/mm/yyyy")]
         public DateOnly Validade { get; set; }
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
