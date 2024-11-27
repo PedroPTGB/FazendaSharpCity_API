@@ -28,7 +28,7 @@ namespace FazendaSharpCity_API.Controllers
 
 
         [Authorize(Roles = UserRoles.Admin)]
-        [HttpPost]
+        [HttpPost("Cadastrar")]
         public async Task<IActionResult> CreateFuncionario([FromBody] CreateFuncionarioDto funcionarioDto)
         {
             try
@@ -55,7 +55,7 @@ namespace FazendaSharpCity_API.Controllers
         }
         
         [Authorize(Roles = UserRoles.Admin)]
-        [HttpGet("{id}")]
+        [HttpGet("PesquisaId/{id}")]
         public async Task<IActionResult> GetFuncionario(int id)
         {
             try
@@ -146,7 +146,7 @@ namespace FazendaSharpCity_API.Controllers
 
 
         [Authorize(Roles = UserRoles.Admin)]
-        [HttpPut("{id}")]
+        [HttpPut("Atualizar/{id}")]
         public async Task<IActionResult> UpdateFuncionario(int id, [FromBody] UpdateFuncionarioDto funcionarioDto)
         {
             try

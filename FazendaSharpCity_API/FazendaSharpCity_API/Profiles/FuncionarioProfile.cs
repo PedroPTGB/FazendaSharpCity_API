@@ -11,6 +11,6 @@ public class FuncionarioProfile : Profile
         CreateMap<CreateFuncionarioDto, Funcionario>();
         CreateMap<UpdateFuncionarioDto, Funcionario>();
         CreateMap<Funcionario, UpdateFuncionarioDto>();
-        CreateMap<Funcionario, ReadFuncionarioDto>().ForMember(funcionarioDto => funcionarioDto.Endereco, opt => opt.MapFrom(cliente => cliente.Endereco));
+        CreateMap<Funcionario, ReadFuncionarioDto>().ForMember(funcionarioDto => funcionarioDto.Endereco, opt => opt.MapFrom(funcionario => funcionario.Endereco));
     }
 }

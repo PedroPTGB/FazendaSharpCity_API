@@ -32,6 +32,6 @@ namespace FazendaSharpCity_API.Models
         public virtual Endereco Endereco { get; set; }
 
         [RegularExpression(@"^\(?\d{2}\)?[\s-]?[\d]{4,5}-?[\d]{4}$", ErrorMessage = "O telefone deve estar em um formato válido (ex: (99) 99999-9999).")]
-        public string TelefoneFornecedor { get; set; }
+        public string Telefone { get; set; }
     }
 }

@@ -26,7 +26,7 @@ namespace FazendaSharpCity_API.Controllers
         }
 
         [Authorize]
-        [HttpPost]
+        [HttpPost("Cadastrar")]
         public async Task<IActionResult> CreateFornecedor([FromBody] CreateFornecedorDto fornecedorDto)
         {
             try
@@ -119,7 +119,7 @@ namespace FazendaSharpCity_API.Controllers
 
 
         [Authorize]
-        [HttpGet("{id}")]
+        [HttpGet("PesquisaId/{id}")]
         public async Task<IActionResult> GetFornecedor(int id)
         {
             try
@@ -142,7 +142,7 @@ namespace FazendaSharpCity_API.Controllers
         }
 
         [Authorize]
-        [HttpPut("{id}")]
+        [HttpPut("Atualizar/{id}")]
         public async Task<IActionResult> UpdateFornecedor(int id, [FromBody] UpdateFornecedorDto fornecedorDto)
         {
             try

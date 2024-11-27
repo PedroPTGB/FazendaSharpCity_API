@@ -9,7 +9,7 @@ namespace FazendaSharpCity_API.Data.DTOs.Funcionario
         public string Nome { get; set; }
         public string CPF { get; set; }
         public string Email { get; set; }
-        public string TelefoneFuncionario { get; set; }
+        public string Telefone { get; set; }
         public ReadEnderecoDto Endereco { get; set; }
     }
 }

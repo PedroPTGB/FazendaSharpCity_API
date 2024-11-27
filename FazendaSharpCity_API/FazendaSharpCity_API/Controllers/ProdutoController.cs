@@ -24,7 +24,7 @@ namespace FazendaSharpCity_API.Controllers
         }
 
         [Authorize]
-        [HttpPost]
+        [HttpPost("Cadastrar")]
         public async Task<IActionResult> CreateProduto([FromBody] CreateProdutoDto createProdutoDto)
         {
             try
@@ -50,7 +50,7 @@ namespace FazendaSharpCity_API.Controllers
         }
 
         [Authorize]
-        [HttpGet("{id}")]
+        [HttpGet("PesquisaId/{id}")]
         public async Task<IActionResult> GetProduto(int id)
         {
             try
@@ -73,7 +73,7 @@ namespace FazendaSharpCity_API.Controllers
         }
 
         [Authorize]
-        [HttpPut("{id}")]
+        [HttpPut("Atualizar/{id}")]
         public async Task<IActionResult> UpdateProduto(int id, [FromBody] UpdateProdutoDto produtoDto)
         {
             try

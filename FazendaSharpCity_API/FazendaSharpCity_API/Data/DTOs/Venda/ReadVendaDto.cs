@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using FazendaSharpCity_API.Data.DTOs.Cliente;
+using System.ComponentModel.DataAnnotations;
 
 namespace FazendaSharpCity_API.Data.DTOs.Venda
 {
@@ -10,5 +11,6 @@ namespace FazendaSharpCity_API.Data.DTOs.Venda
         public DateOnly DataDaVenda { get; set; }
         public string FormaDePagamento { get; set; }
         public int Quantidade { get; set; }
+        public ReadClienteDto ReadClienteDto { get; set; }
     }
 }

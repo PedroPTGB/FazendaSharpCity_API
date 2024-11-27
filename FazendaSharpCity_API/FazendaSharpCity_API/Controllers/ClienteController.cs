@@ -30,7 +30,7 @@ namespace FazendaSharpCity_API.Controllers
         }
 
         [Authorize]
-        [HttpPost]
+        [HttpPost("Cadastrar")]
         public async Task<IActionResult> CreateClienteDto([FromBody] CreateClienteDto clienteDto)
         {
             try
@@ -150,7 +150,7 @@ namespace FazendaSharpCity_API.Controllers
         }
 
         [Authorize]
-        [HttpPut("{id}")]
+        [HttpPut("Atualizar/{id}")]
         public async Task<IActionResult> UpdateCliente(int id, [FromBody] UpdateClienteDto clienteDto)
         {
             try

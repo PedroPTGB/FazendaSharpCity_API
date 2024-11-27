@@ -17,7 +17,7 @@ namespace FazendaSharpCity_API.Data.DTOs.Funcionario
         public string Email { get; set; }
 
         [RegularExpression(@"^\(?\d{2}\)?[\s-]?[\d]{4,5}-?[\d]{4}$", ErrorMessage = "O telefone deve estar em um formato válido (ex: (99) 99999-9999).")]
-        public string TelefoneFuncionario { get; set; }
+        public string Telefone { get; set; }
 
         [Required(ErrorMessage = "O id do endereco é obrigatório")]
         public int EnderecoId { get; set; }

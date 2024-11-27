@@ -11,7 +11,7 @@ namespace FazendaSharpCity_API.Profiles
             CreateMap<CreateVendaDto, Venda>();
             CreateMap<UpdateVendaDto, Venda>();
             CreateMap<Venda, UpdateVendaDto>();
-            CreateMap<Venda, ReadVendaDto>();
+            CreateMap<Venda, ReadVendaDto>().ForMember(vendaDto => vendaDto.ReadClienteDto, opt => opt.MapFrom(venda => venda.Cliente));
         }
             
     }

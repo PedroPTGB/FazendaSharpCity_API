@@ -26,6 +26,6 @@ namespace FazendaSharpCity_API.Models
         public int EnderecoId { get; set; }
         public virtual Endereco Endereco { get; set; }
 
-        public string TelefoneFuncionario { get; set; }
+        public string Telefone { get; set; }
     }
 }

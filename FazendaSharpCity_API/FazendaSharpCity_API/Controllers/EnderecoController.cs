@@ -23,7 +23,7 @@ namespace FazendaSharpCity_API.Controllers
         }
 
         [Authorize]
-        [HttpPost]
+        [HttpPost("Cadastrar")]
         public async Task<IActionResult> CreateEndereco([FromBody] CreateEnderecoDto enderecoDto)
         {
             try
@@ -50,7 +50,7 @@ namespace FazendaSharpCity_API.Controllers
         }
 
         [Authorize]
-        [HttpGet("{id}")]
+        [HttpGet("PesquisaId/{id}")]
         public async Task<IActionResult> ReadEndereco(int id)
         {
             try
@@ -74,7 +74,7 @@ namespace FazendaSharpCity_API.Controllers
         }
 
         [Authorize]
-        [HttpPut("{id}")]
+        [HttpPut("Atualizar/{id}")]
         public async Task<IActionResult> UpdateEndereco(int id, [FromBody] UpdateEnderecoDto enderecoDto)
         {
             try
